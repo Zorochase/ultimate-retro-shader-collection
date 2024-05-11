@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cej5f3jn7rhqf"]
+
+[ext_resource type="FontFile" uid="uid://bsgmup0j2l6a4" path="res://theme/font.ttf" id="1_8yer8"]
+[ext_resource type="StyleBox" uid="uid://yrkv8y1pimhn" path="res://theme/style_boxes/normal_style_box.tres" id="1_kc4h6"]
+[ext_resource type="StyleBox" uid="uid://bxfe45wtah4qo" path="res://theme/style_boxes/focus_style_box.tres" id="2_s3hs7"]
+[ext_resource type="StyleBox" uid="uid://cnnrmkb310wgf" path="res://theme/style_boxes/hover_style_box.tres" id="3_pcxly"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_beno8"]
+
+[resource]
+default_font = ExtResource("1_8yer8")
+Button/colors/font_disabled_color = Color(0.501961, 0.501961, 0.501961, 1)
+Button/colors/font_hover_pressed_color = Color(0, 1, 1, 1)
+Button/colors/font_pressed_color = Color(0, 1, 1, 1)
+Button/styles/disabled = ExtResource("1_kc4h6")
+Button/styles/focus = ExtResource("2_s3hs7")
+Button/styles/hover = ExtResource("3_pcxly")
+Button/styles/hover_pressed = ExtResource("3_pcxly")
+Button/styles/normal = ExtResource("1_kc4h6")
+Button/styles/pressed = ExtResource("1_kc4h6")
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_beno8")
+RichTextLabel/styles/normal = ExtResource("1_kc4h6")

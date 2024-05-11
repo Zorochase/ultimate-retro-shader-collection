@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://d0lmbh23sfivw"]
+
+[ext_resource type="Shader" path="res://shaders/ursc/spatial/standard_opaque.gdshader" id="1_gbvap"]
+[ext_resource type="Texture2D" uid="uid://6kho5l1okpur" path="res://app/models/floor/texture.png" id="2_t13t5"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gbvap")
+shader_parameter/albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
+shader_parameter/albedo_texture_as_primary_color = true
+shader_parameter/mix_factor = 1.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_scroll_speed = Vector2(0, 0)
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/albedo_texture = ExtResource("2_t13t5")

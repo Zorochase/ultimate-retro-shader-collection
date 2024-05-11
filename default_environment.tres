@@ -1,0 +1,6 @@
+[gd_resource type="Environment" format=3 uid="uid://fh4bty4uvxd7"]
+
+[resource]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 1

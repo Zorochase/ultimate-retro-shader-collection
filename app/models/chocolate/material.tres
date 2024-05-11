@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://x7px0mb4ayw8"]
+
+[ext_resource type="Shader" path="res://shaders/ursc/spatial/shiny_opaque.gdshader" id="1_yb4j0"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_yb4j0")
+shader_parameter/albedo_color = Color(0.38, 0.227, 0.169, 1)
+shader_parameter/color_precision = 16.0
+shader_parameter/glossiness = 0.1
+shader_parameter/shadow_intensity = 0.1
+shader_parameter/cull_distance = 64.0

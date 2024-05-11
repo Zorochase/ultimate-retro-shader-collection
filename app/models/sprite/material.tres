@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dd3oqk48ql48n"]
+
+[ext_resource type="Shader" path="res://shaders/ursc/spatial/sprite.gdshader" id="1_dmxhc"]
+[ext_resource type="Texture2D" uid="uid://jg3jc166gxml" path="res://app/models/sprite/texture.png" id="2_43ltb"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_dmxhc")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor = 0.1
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_scale = Vector2(0.167, 1)
+shader_parameter/uv_scroll_speed = Vector2(0, 0)
+shader_parameter/billboard_mode = 1
+shader_parameter/use_transform_scale = true
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/albedo_texture = ExtResource("2_43ltb")

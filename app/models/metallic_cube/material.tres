@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://n6cm4qex5ige"]
+
+[ext_resource type="Shader" path="res://shaders/ursc/spatial/metallic_opaque.gdshader" id="1_l47g5"]
+[ext_resource type="Texture2D" uid="uid://w6resxjeloog" path="res://app/models/metallic_cube/texture.png" id="2_4o3oi"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_l47g5")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture_as_primary_color = true
+shader_parameter/mix_factor = 1.0
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/albedo_texture = ExtResource("2_4o3oi")
