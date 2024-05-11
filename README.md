@@ -11,7 +11,7 @@ A compilation of shaders designed to replicate the graphical style of the PlaySt
 
 Ultimate Retro Shader Collection (**_URSC_**) is a unification and enhancement of various "retro-3D" shaders sourced from the Godot community. These shaders are essential for creating authentic graphics reminiscent of the *PlayStation* (PSX) or *Nintendo 64* (N64).
 
-This repository is home to the collection itself and a demo project which demonstrates how to use it. You can download the collection separately or get the demo executable by heading to [Releases]().
+This repository is home to the collection itself and a demo project which demonstrates how to use it. You can download the collection separately or get the demo executable by heading to [Releases](https://github.com/Zorochase/ultimate-retro-shader-collection/releases).
 
 ### Shader Features:
 - Vertex snapping (a.k.a. *vertex jitter*)

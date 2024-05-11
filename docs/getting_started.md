@@ -1,6 +1,6 @@
 # 🚀 Getting Started
 
-You can download URSC as a standalone zip file by heading to [Releases]().
+You can download URSC as a standalone zip file by heading to [Releases](https://github.com/Zorochase/ultimate-retro-shader-collection/releases).
 
 > [!IMPORTANT]
 > Be sure to download the version of the collection that corresponds to the version of Godot you are using. You'll see the Godot version in the name of the zip file.
