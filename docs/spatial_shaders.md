@@ -47,6 +47,12 @@ This can be used to give your model a "shiny" or "glossy" look.
 
 ![Example](images/shiny_example.png)
 
+### `sprite.gdshader`
+
+Apply this shader to the material of a `MeshInstance` with a `QuadMesh` to turn it into a 3D sprite that rotates to face the camera.
+
+![Example](images/sprite_example.png)
+
 ## 🎚️ Uniforms
 
 URSC `spatial` shaders offer a wide range of uniforms, which, in most cases, will be enough to help you achieve the desired look for your models.
