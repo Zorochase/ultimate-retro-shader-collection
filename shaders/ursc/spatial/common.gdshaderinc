@@ -264,9 +264,9 @@ void fragment()
 	vec3 darkness = glimmer(vec3(dark_dot));
 
 	ALBEDO =
-		albedo_color.rgb +
+		clamp(albedo_color.rgb +
 		brightness +
-		clamp(darkness, vec3(0.00000), vec3(1.00000)) * vec3(-shadow_intensity);
+		darkness * vec3(-shadow_intensity), 0.0, 1.0);
 
 #if defined(ALPHA_BLEND)
 	ALPHA = albedo_color.a;
