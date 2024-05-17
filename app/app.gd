@@ -1,31 +1,35 @@
 extends Node
 
-
 const REFERENCE_RESOLUTION = Vector2i(640, 360)
-const ABSOLUTE_MAX_WINDOW_SCALE = 6
+const DESKTOP_MAX_WINDOW_SCALE = 6
 
 static var VERSION = ProjectSettings.get_setting("application/config/version")
+static var IS_WEB_VERSION = OS.has_feature("web")
 
 
-@export
-var _fullscreen := true
-
-@export
-var _play_music_on_startup := true
-
-
-var _show_menu: bool:
-	get: return _show_menu
+var _fullscreen: bool:
+	get: return _fullscreen
 
 	set(value):
-		_show_menu = value
+		_fullscreen = value
 
-		_menu.visible = _show_menu
+		if _fullscreen:
+			_window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+		else:
+			_window.mode = Window.MODE_WINDOWED
 
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if _show_menu else Input.MOUSE_MODE_CAPTURED
+			var scale := 1
 
-		_planar_layer.mouse_filter = (
-			Control.MOUSE_FILTER_STOP if _show_menu else Control.MOUSE_FILTER_IGNORE)
+			for i in range(1, DESKTOP_MAX_WINDOW_SCALE):
+				if REFERENCE_RESOLUTION * i < DisplayServer.screen_get_size():
+					scale = i
+				else:
+					break
+
+			_window.size = REFERENCE_RESOLUTION * scale
+
+			_window.position = (
+				DisplayServer.screen_get_size() / 2 - _window.size / 2)
 
 
 var _play_music: bool:
@@ -34,6 +38,30 @@ var _play_music: bool:
 	set(value):
 		_play_music = value
 		_music.play() if _play_music else _music.stop()
+
+
+var _free_camera_mode: bool:
+	get: return _free_camera_mode
+
+	set(value):
+		_free_camera_mode = value
+		_free_camera.camera.current = value
+		_orbit_camera.camera.current = not value
+
+
+var _show_menu: bool:
+	get: return _show_menu
+
+	set(value):
+		_show_menu = value
+		_menu.visible = _show_menu
+
+		_planar_layer.mouse_filter = (
+			Control.MOUSE_FILTER_STOP if _show_menu else Control.MOUSE_FILTER_IGNORE)
+
+		if not IS_WEB_VERSION:
+			Input.mouse_mode = (
+				Input.MOUSE_MODE_VISIBLE if _show_menu else Input.MOUSE_MODE_CAPTURED)
 
 
 var _active_sample_index: int:
@@ -50,7 +78,7 @@ var _pixelation_intensity: int:
 	get: return _pixelation_intensity
 
 	set(value):
-		_pixelation_intensity = wrapi(value, 0, ABSOLUTE_MAX_WINDOW_SCALE)
+		_pixelation_intensity = wrapi(value, 0, DESKTOP_MAX_WINDOW_SCALE)
 		_spatial_layer.stretch_shrink = _pixelation_intensity + 1
 
 
@@ -105,7 +133,13 @@ var _spatial_layer: SubViewportContainer = $SpatialLayer
 var _spatial_layer_material: ShaderMaterial = _spatial_layer.material as ShaderMaterial
 
 @onready
-var _player: Player = %Player
+var _free_camera: FreeCamera = %FreeCamera
+
+@onready
+var _orbit_camera: OrbitCamera = %OrbitCamera
+
+@onready
+var _floor: MeshInstance3D = %Floor
 
 @onready
 var _samples: Node3D = %Samples
@@ -117,16 +151,19 @@ var _planar_layer: SubViewportContainer = $PlanarLayer
 var _title_label: RichTextLabel = %Title
 
 @onready
-var _speed_indicator_label: RichTextLabel = %SpeedIndicator
+var _camera_info_label: RichTextLabel = %CameraInfo
 
 @onready
-var _speed_indicator_label_base_text := _speed_indicator_label.text
+var _camera_info_label_base_text := _camera_info_label.text
+
+@onready
+var _menu_visibility_indicator: RichTextLabel = %MenuVisibilityIndicator
+
+@onready
+var _menu_visibility_indicator_base_text := _menu_visibility_indicator.text
 
 @onready
 var _menu: VBoxContainer = %Menu
-
-@onready
-var _sample_button: Button = %Sample
 
 @onready
 var _fullscreen_button: Button = %Fullscreen
@@ -139,6 +176,15 @@ var _music_button: Button = %Music
 
 @onready
 var _music_button_base_text := _music_button.text
+
+@onready
+var _floor_button: Button = %FloorToggle
+
+@onready
+var _floor_button_base_text := _floor_button.text
+
+@onready
+var _sample_button: Button = %Sample
 
 @onready
 var _sample_button_base_text := _sample_button.text
@@ -174,48 +220,76 @@ var _texture_filtering_button: Button = %TextureFiltering
 var _texture_filtering_button_base_text := _texture_filtering_button.text
 
 @onready
+var _quit_button: Button = %Quit
+
+@onready
 var _fade_overlay: FadeOverlay = $FadeOverlay
 
 
 func _ready() -> void:
-	_show_menu = false
-
 	_window.min_size = REFERENCE_RESOLUTION
 	_window.msaa_3d = Viewport.MSAA_DISABLED
 	_window.title = "Retro Shaders Demo (v%s)" % VERSION
-	_update_window()
+	_fullscreen = true
 
 	_title_label.text %= VERSION
 
-	_active_sample_index = 0
+	_menu_visibility_indicator.visible = not IS_WEB_VERSION
+	_fullscreen_button.visible = not IS_WEB_VERSION
+	_quit_button.visible = not IS_WEB_VERSION
+
+	_free_camera_mode = false
+	_show_menu = true
 
 	_pixelation_intensity = 0
 	_low_color_depth = false
-
 	_vertex_snap_intensity = 2
 	_affine_texture_mapping = true
 	_texture_filtering = false
 
 	await _fade_overlay.fade_out()
-
-	_play_music = _play_music_on_startup
+	_play_music = true
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("toggle_fullscreen"):
-		_fullscreen = not _fullscreen
-		_update_window()
+	if not IS_WEB_VERSION:
+		if Input.is_action_just_pressed("toggle_fullscreen"):
+			_fullscreen = not _fullscreen
 
-	if Input.is_action_just_pressed("toggle_menu"):
-		_show_menu = not _show_menu
+		if Input.is_action_just_pressed("toggle_menu"):
+			_show_menu = not _show_menu
 
-	_speed_indicator_label.text = _speed_indicator_label_base_text % _player.speed
+		if Input.is_action_just_pressed("toggle_free_camera_mode"):
+			_free_camera_mode = not _free_camera_mode
 
-	_fullscreen_button.button_pressed = _fullscreen
-	_fullscreen_button.text = _fullscreen_button_base_text % _format_bool(_fullscreen)
+		_menu_visibility_indicator.text = (
+			_menu_visibility_indicator_base_text %
+			_format_bool(_show_menu, "Hide", "Show"))
+
+		_fullscreen_button.button_pressed = _fullscreen
+		_fullscreen_button.text = _fullscreen_button_base_text % _format_bool(_fullscreen)
+
+	if _free_camera_mode:
+		_camera_info_label.text = _camera_info_label_base_text % [
+			"Speed: %s" % _free_camera.speed,
+			"modify: wheel up/down",
+			"orbit mode: tab" if not IS_WEB_VERSION else ""
+		]
+	else:
+		_camera_info_label.text = _camera_info_label_base_text % [
+			"Orbit Mode: %s" % (
+				"OFF" if not _orbit_camera.spin_enabled else
+				("[color=yellow]REVERSE" if _orbit_camera.spin_reverse else "[color=aqua]ON")),
+
+			"toggle: space; reverse: shift",
+			"free mode: tab" if not IS_WEB_VERSION else ""
+		]
 
 	_music_button.button_pressed = _play_music
-	_music_button.text = _music_button_base_text % _format_bool(_play_music, "playing", "stopped")
+	_music_button.text = _music_button_base_text % _format_bool(_play_music, "PLAYING", "STOPPED")
+
+	_floor_button.button_pressed = _floor.visible
+	_floor_button.text = _floor_button_base_text % _format_bool(_floor.visible, "SHOWN", "HIDDEN")
 
 	_sample_button.text = _sample_button_base_text % [
 		_active_sample_index + 1, _samples.get_child_count()]
@@ -239,41 +313,20 @@ func _process(_delta: float) -> void:
 		_texture_filtering_button_base_text % _format_bool(_texture_filtering))
 
 
-func _update_window() -> void:
-	if _fullscreen:
-		_window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
-	else:
-		_window.mode = Window.MODE_WINDOWED
-
-		var scale := 1
-
-		for i in range(1, ABSOLUTE_MAX_WINDOW_SCALE):
-			if REFERENCE_RESOLUTION * i < DisplayServer.screen_get_size():
-				scale = i
-			else:
-				break
-
-		_window.size = REFERENCE_RESOLUTION * scale
-
-		_window.position = (
-			DisplayServer.screen_get_size() / 2 - _window.size / 2)
-
-
-func _format_bool(value: bool, if_true := "on", if_false := "off") -> String:
-	return (if_true if value else if_false).to_upper()
-
-
-func _on_close_menu_button_pressed() -> void:
-	_show_menu = false
+func _format_bool(value: bool, if_true := "ON", if_false := "OFF") -> String:
+	return if_true if value else if_false
 
 
 func _on_fullscreen_button_toggled(toggled_on: bool) -> void:
 	_fullscreen = toggled_on
-	_update_window()
 
 
 func _on_music_button_toggled(toggled_on: bool) -> void:
 	_play_music = toggled_on
+
+
+func _on_floor_button_toggled(toggled_on: bool) -> void:
+	_floor.visible = toggled_on
 
 
 func _on_sample_button_pressed() -> void:

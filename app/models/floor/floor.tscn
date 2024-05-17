@@ -27,11 +27,11 @@ script/source = "extends MeshInstance3D
 
 
 @onready
-var _player: Player = get_node(\"/root/App/%Player\")
+var _free_camera: FreeCamera = get_node(\"/root/App/%FreeCamera\")
 
 
 func _process(_delta: float) -> void:
-	visible = _player.position.y < 0
+	visible = _free_camera.position.y < 0
 "
 
 [node name="Floor" type="MeshInstance3D"]

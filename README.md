@@ -9,9 +9,9 @@ A compilation of shaders designed to replicate the graphical style of the PlaySt
 
 ## 📋 Overview
 
-Ultimate Retro Shader Collection (**_URSC_**) is a unification and enhancement of various "retro-3D" shaders sourced from the Godot community. These shaders are essential for creating authentic graphics reminiscent of the *PlayStation* (PSX) or *Nintendo 64* (N64).
+Ultimate Retro Shader Collection (**URSC**) is a unification and enhancement of various "retro-3D" shaders sourced from the Godot community. These shaders are essential for creating authentic graphics reminiscent of the *PlayStation* (PSX) or *Nintendo 64* (N64).
 
-This repository is home to the collection itself and a demo project which demonstrates how to use it. You can download the collection separately or get the demo executable by heading to [Releases](https://github.com/Zorochase/ultimate-retro-shader-collection/releases). You can also find them on [itch.io](https://zorochase.itch.io/ultimate-retro-shader-collection-for-godot).
+This repository is home to the collection itself and an interactive demo. You can download the collection as a standalone zip file or get the demo executable by visiting [Releases](https://github.com/Zorochase/ultimate-retro-shader-collection). URSC also has an [itch.io page](https://zorochase.itch.io/ultimate-retro-shader-collection-for-godot) with downloads and a **browser-playable** version of the demo!
 
 ### Shader Features:
 - Vertex snapping (a.k.a. *vertex jitter*)
@@ -23,17 +23,30 @@ This repository is home to the collection itself and a demo project which demons
 - Bonus `canvas_item` shaders:
   - PSX-like additive/subtractive fade
   - Color reduction with dithering
+- Supports all [rendering methods](https://docs.godotengine.org/en/stable/contributing/development/core_and_modules/internal_rendering_architecture.html#rendering-methods) (`Forward+`, `Mobile`, and `Compatibility`) (1.1.0+)
 
 ### Demo Features:
 - A variety of samples
-- Freecam
+- Two camera modes: **orbit** and **free**
 - Control shader parameters through the menu
+- Background music
 
 ### Demo Controls:
-- Move: WASD; space or E to move up; shift or Q to move down
-- Increase/decrease movement speed: mouse wheel up/down
+- Toggle fullscreen: F11 or alt + enter (option + enter on macOS)
 - Toggle menu: escape
-- Toggle fullscreen: F11 or Alt + Enter (Option + Enter on macOS)
+- In free mode:
+  - Move: WASD; space or E to move up; shift or Q to move down
+  - Change movement speed: mouse wheel up/down
+- In orbit mode:
+  - Toggle orbit: space
+  - Reverse orbit direction: shift
+
+### Demo Version Differences:
+- The web version:
+  - uses the `Compatibility` rendering method.
+  - only supports the **orbit** camera mode (all controls for this mode are available).
+  - does not support the above controls for toggling fullscreen. To toggle fullscreen, you must use your browser's provided controls. On Itch, a button to enable fullscreen is provided.
+  - does not support the above control for toggling the menu.
 
 ## 📖 Documentation
 

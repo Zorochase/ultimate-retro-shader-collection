@@ -1,11 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://dsfuy751padsu"]
+[gd_scene load_steps=21 format=3 uid="uid://dsfuy751padsu"]
 
 [ext_resource type="Script" path="res://app/app.gd" id="1_gu4b0"]
 [ext_resource type="AudioStream" uid="uid://dofxcqjeghcx3" path="res://app/music.ogg" id="2_crgi3"]
 [ext_resource type="Shader" path="res://shaders/ursc/canvas_item/dithering.gdshader" id="2_yu7j4"]
 [ext_resource type="Texture2D" uid="uid://b7hkgafa6ytrn" path="res://app/dithering_pattern.png" id="3_6fur4"]
 [ext_resource type="PackedScene" uid="uid://cidinjynknws6" path="res://app/models/floor/floor.tscn" id="5_dbvra"]
-[ext_resource type="Script" path="res://app/player.gd" id="5_gwqpl"]
+[ext_resource type="Script" path="res://app/free_camera.gd" id="5_gwqpl"]
+[ext_resource type="Script" path="res://app/orbit_camera.gd" id="6_g7xg1"]
 [ext_resource type="PackedScene" uid="uid://ckf2xqt5xeowh" path="res://app/models/cube/cube.tscn" id="6_s7kmq"]
 [ext_resource type="Shader" path="res://shaders/ursc/canvas_item/fade.gdshader" id="6_wv37t"]
 [ext_resource type="PackedScene" uid="uid://bd30icixtw6ri" path="res://app/models/metallic_cube/metallic_cube.tscn" id="7_5fvgl"]
@@ -101,14 +102,24 @@ environment = SubResource("Environment_5je8s")
 [node name="Sun" type="DirectionalLight3D" parent="SpatialLayer/SubViewport/World"]
 transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 10, 0)
 
-[node name="Player" type="Node3D" parent="SpatialLayer/SubViewport/World"]
+[node name="FreeCamera" type="Node3D" parent="SpatialLayer/SubViewport/World"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 6)
 script = ExtResource("5_gwqpl")
 
-[node name="Camera" type="Camera3D" parent="SpatialLayer/SubViewport/World/Player"]
+[node name="Camera" type="Camera3D" parent="SpatialLayer/SubViewport/World/FreeCamera"]
+current = true
+
+[node name="OrbitCamera" type="Node3D" parent="SpatialLayer/SubViewport/World"]
+unique_name_in_owner = true
+script = ExtResource("6_g7xg1")
+float_enabled = false
+
+[node name="Camera" type="Camera3D" parent="SpatialLayer/SubViewport/World/OrbitCamera"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 5)
 
 [node name="Floor" parent="SpatialLayer/SubViewport/World" instance=ExtResource("5_dbvra")]
+unique_name_in_owner = true
 
 [node name="Samples" type="Node3D" parent="SpatialLayer/SubViewport/World"]
 unique_name_in_owner = true
@@ -176,13 +187,14 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="SpeedIndicator" type="RichTextLabel" parent="PlanarLayer/SubViewport/Ui/VBoxContainer"]
+[node name="CameraInfo" type="RichTextLabel" parent="PlanarLayer/SubViewport/Ui/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 bbcode_enabled = true
-text = "Speed: %s
-[color=#808080](wheel up/down)[/color]"
+text = "[img]res://app/camera_icon.png[/img] %s
+[color=#808080]%s
+%s"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -190,16 +202,19 @@ autowrap_mode = 0
 [node name="Separator" type="Label" parent="PlanarLayer/SubViewport/Ui/VBoxContainer"]
 layout_mode = 2
 
+[node name="MenuVisibilityIndicator" type="RichTextLabel" parent="PlanarLayer/SubViewport/Ui/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+bbcode_enabled = true
+text = "[color=#808080]%s menu: escape"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
 [node name="Menu" type="VBoxContainer" parent="PlanarLayer/SubViewport/Ui/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-
-[node name="CloseMenu" type="Button" parent="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu"]
-layout_mode = 2
-size_flags_horizontal = 0
-focus_mode = 1
-text = "Close Menu"
-alignment = 0
 
 [node name="Fullscreen" type="Button" parent="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu"]
 unique_name_in_owner = true
@@ -219,6 +234,15 @@ toggle_mode = true
 text = "Music: %s"
 alignment = 0
 
+[node name="FloorToggle" type="Button" parent="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 1
+toggle_mode = true
+text = "Floor: %s"
+alignment = 0
+
 [node name="Sample" type="Button" parent="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -232,7 +256,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 1
-text = "Pixelation Intensity: %s"
+text = "Pixelation intensity: %s"
 alignment = 0
 
 [node name="LowColorDepth" type="Button" parent="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu"]
@@ -241,7 +265,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 1
 toggle_mode = true
-text = "Low Color Depth: %s"
+text = "Low color depth: %s"
 alignment = 0
 
 [node name="VertexSnapIntensity" type="Button" parent="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu"]
@@ -249,7 +273,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 1
-text = "Vertex Snap Intensity: %s"
+text = "Vertex snap intensity: %s"
 alignment = 0
 
 [node name="AffineTextureMapping" type="Button" parent="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu"]
@@ -258,7 +282,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 1
 toggle_mode = true
-text = "Affine Texture Mapping: %s"
+text = "Affine texture mapping: %s"
 alignment = 0
 
 [node name="TextureFiltering" type="Button" parent="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu"]
@@ -267,10 +291,11 @@ layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 1
 toggle_mode = true
-text = "Texture Filtering: %s"
+text = "Texture filtering: %s"
 alignment = 0
 
 [node name="Quit" type="Button" parent="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 1
@@ -294,9 +319,9 @@ libraries = {
 "": SubResource("AnimationLibrary_2sb81")
 }
 
-[connection signal="pressed" from="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu/CloseMenu" to="." method="_on_close_menu_button_pressed"]
 [connection signal="toggled" from="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu/Fullscreen" to="." method="_on_fullscreen_button_toggled"]
 [connection signal="toggled" from="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu/Music" to="." method="_on_music_button_toggled"]
+[connection signal="toggled" from="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu/FloorToggle" to="." method="_on_floor_button_toggled"]
 [connection signal="pressed" from="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu/Sample" to="." method="_on_sample_button_pressed"]
 [connection signal="pressed" from="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu/PixelationIntensity" to="." method="_on_pixelation_intensity_button_pressed"]
 [connection signal="toggled" from="PlanarLayer/SubViewport/Ui/VBoxContainer/Menu/LowColorDepth" to="." method="_on_low_color_depth_button_toggled"]

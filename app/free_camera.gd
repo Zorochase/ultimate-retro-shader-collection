@@ -1,4 +1,4 @@
-class_name Player
+class_name FreeCamera
 extends Node3D
 
 
@@ -26,6 +26,9 @@ var camera: Camera3D = $Camera
 
 
 func _input(event: InputEvent) -> void:
+	if not camera.current:
+		return
+
 	if event is InputEventMouseMotion and is_mouse_captured:
 		var actual_mouse_sensitivity = mouse_sensitivity * 0.001
 
@@ -39,6 +42,9 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if not camera.current:
+		return
+
 	var vertical_input := 0.0
 	var horizontal_input := Vector2.ZERO
 
