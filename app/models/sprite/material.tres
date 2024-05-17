@@ -1,11 +1,19 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dd3oqk48ql48n"]
 
-[ext_resource type="Shader" path="res://shaders/ursc/spatial/sprite.gdshader" id="1_dmxhc"]
 [ext_resource type="Texture2D" uid="uid://jg3jc166gxml" path="res://app/models/sprite/texture.png" id="2_43ltb"]
+
+[sub_resource type="Shader" id="Shader_y56ym"]
+code = "shader_type spatial;
+
+#define UNSHADED
+#define ALPHA_SCISSOR
+#define BILLBOARD
+
+#include \"res://shaders/ursc/spatial/common.gdshaderinc\""
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_dmxhc")
+shader = SubResource("Shader_y56ym")
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_scissor = 0.1
 shader_parameter/uv_offset = Vector2(0, 0)
