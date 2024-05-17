@@ -10,3 +10,4 @@ mesh = ExtResource("1_6028s")
 surface_material_override/0 = ExtResource("2_s1v5v")
 script = ExtResource("3_mty84")
 spin_reverse = true
+spin_speed = 1.2
