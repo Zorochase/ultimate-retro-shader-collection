@@ -278,6 +278,10 @@ If defined, the shader will no longer expose any texture-related uniforms.
 
 If defined in a shader, the ["metallic" effect](#metallic_opaquetransparentgdshader) will be applied to all models with this shader. Any incompatible uniforms will not be compiled for this shader.
 
+### `TEXTURE_REPEAT` (1.1.0+)
+
+If defined in a shader, texture repeat will be enabled for the albedo texture on all models with this shader. Depending on the model, this may cause visible seams to appear around the edges when [🌎 `texture_filtering`](#🌎-bool-texture_filtering) is `true`.
+
 ### `UNSHADED`
 
 If defined, lighting provided by any `Light3D` node (`DirectionalLight3D`, `OmniLight3D`, etc.) will be disabled on all models with this shader.

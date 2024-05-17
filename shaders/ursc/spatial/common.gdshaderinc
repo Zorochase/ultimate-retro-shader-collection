@@ -67,7 +67,14 @@ uniform float color_depth : hint_range(16, 64, 16) = 16;
 uniform float glossiness : hint_range(0, 1, 0.05) = 0.4;
 uniform float shadow_intensity : hint_range(0, 1, 0.05) = 0.65;
 #elif !defined(TEXTURE_DISABLED)
-uniform sampler2D albedo_texture : source_color, filter_nearest, repeat_enable;
+uniform sampler2D albedo_texture :
+	source_color,
+	filter_nearest,
+#if defined(TEXTURE_REPEAT)
+	repeat_enable;
+#else
+	repeat_disable;
+#endif
 
 #if (defined(ALPHA_SCISSOR) && !defined(SHINY) && !defined(TEXTURE_METAL))
 uniform float alpha_scissor : hint_range(0, 1, 0.01) = 0.1;
