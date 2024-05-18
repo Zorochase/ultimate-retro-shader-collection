@@ -18,7 +18,7 @@ There are two uniforms exposed by this shader:
 - `sampler2D` `dithering_pattern_texture`: the texture that defines the pattern used for dithering, which helps to reduce the visible "banding" that follows color-count reduction. If this uniform is left empty, dithering is disabled, allowing the banding to be visible.
 
 > [!TIP]
-> You can find a great set of free pattern textures [here](https://github.com/tromero/BayerMatrix), thanks to [**tromero** on GitHub](https://github.com/tromero/).
+> You can find a great set of free pattern textures [here, thanks to **tromero**](https://github.com/tromero/BayerMatrix).
 
 ## `fade.gdshader`
 

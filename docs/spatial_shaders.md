@@ -7,13 +7,13 @@ In the `ursc/spatial` folder, you'll find several files. Most of the shaders in 
 > - your model has a (semi-)transparent texture or vertex colors.
 > - you want to use the `alpha` component of the `albedo_color` uniform.
 
-## 📁 Files
+## :file_folder: Files
 
 ### `common.gdshaderinc`
 
 This file serves as the foundation for all the `spatial` shaders in the collection. It makes extensive use of [macros](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shader_preprocessor.html#define) to set the `render_mode` and determine which uniforms are exposed when certain shaders are applied to a material.
 
-You can `#include` this file in your own shader file and `#define` particular macros to gain greater control over the appearance of a model beyond what the following files offer. See [⚡ Macros](#⚡-macros) for more information.
+You can `#include` this file in your own shader file and `#define` particular macros to gain greater control over the appearance of a model beyond what the following files offer. See [:zap: Macros](#zap-macros) for more information.
 
 ### `basic_(opaque|transparent).gdshader`
 
@@ -53,18 +53,18 @@ Apply this shader to the material of a `MeshInstance` with a `QuadMesh` to turn 
 
 ![Example](images/sprite_example.png)
 
-## 🎚️ Uniforms
+## :level_slider: Uniforms
 
 URSC `spatial` shaders offer a wide range of uniforms, which, in most cases, will be enough to help you achieve the desired look for your models.
 
-As previously explained, `common.gdshaderinc` utilizes macros to determine which uniforms a given shader exposes. Reading onward, note that a list of required or incompatible macros indicates whether the macros must or must not be defined in a shader file for the uniform to be exposed by that shader. A complete list of macros recognized by `common.gdshaderinc` can be found [here](#⚡-macros).
+As previously explained, `common.gdshaderinc` utilizes macros to determine which uniforms a given shader exposes. Reading onward, note that a list of required or incompatible macros indicates whether the macros must or must not be defined in a shader file for the uniform to be exposed by that shader. A complete list of macros recognized by `common.gdshaderinc` can be found [here](#zap-macros).
 
 > [!NOTE]
-> "🌎" represents *global* uniforms (defined in Project Settings).
+> ":earth_americas:" represents *global* uniforms (defined in Project Settings).
 >
-> "📍" represents per-material (*local*) uniforms.
+> ":round_pushpin:" represents per-material (*local*) uniforms.
 
-### 🌎 `bool` `affine_texture_mapping`
+### :earth_americas: `bool` `affine_texture_mapping`
 
 If `true`, the "texture warping" effect will be enabled across all textured models.
 
@@ -73,11 +73,11 @@ Incompatible macros:
 - `TEXTURE_METAL`
 - `SHINY`
 
-### 🌎 `float` `cull_distance`
+### :earth_americas: `float` `cull_distance`
 
-Controls the visible range of all models, relative to the current camera. When set to `0`, shader-based culling is disabled, unless [📍 `cull_distance_override`](#📍-float-cull_distance_override) is configured.
+Controls the visible range of all models, relative to the current camera. When set to `0`, shader-based culling is disabled, unless [:round_pushpin: `cull_distance_override`](#round_pushpin-float-cull_distance_override) is configured.
 
-### 🌎 `bool` `texture_filtering`
+### :earth_americas: `bool` `texture_filtering`
 
 If `true`, N64-style 3-point texture filtering will be enabled across all textured models.
 
@@ -85,7 +85,7 @@ Incompatible macros:
 - `TEXTURE_DISABLED`
 - `SHINY`
 
-### 🌎 `int` `vertex_snap_intensity`
+### :earth_americas: `int` `vertex_snap_intensity`
 
 Controls the degree of vertex "snappiness," or "jitter," for all models.
 
@@ -97,7 +97,7 @@ Ranges from 0 to 2; a value of `0` results in no snapping, while a value of `2` 
 Incompatible macros:
 - OVERRIDE_VERTEX_SNAP_RESOLUTION
 
-### 🌎 `ivec2` `vertex_snap_resolution` (optional)
+### :earth_americas: `ivec2` `vertex_snap_resolution` (optional)
 
 Controls the degree of vertex "snappiness," or "jitter," for all models. This uniform is only used when the following is added to `common.gdshaderinc` or a custom `.gdshader` file:
 ```
@@ -109,11 +109,11 @@ Controls the degree of vertex "snappiness," or "jitter," for all models. This un
 >
 > If you only want control over the snap resolution for specific models, you can add the above code to a custom `.gdshader` file and supply that file to the materials of these models. This approach ensures that models using normal URSC shaders will continue to utilize `vertex_snap_intensity`.
 
-### 📍 `vec3/vec4` `albedo_color`
+### :round_pushpin: `vec3/vec4` `albedo_color`
 
 Controls the overall color of the model. Shaders with the `ALPHA_BLEND` macro defined will expose this as a `vec4` with an `alpha` component.
 
-### 📍 `sampler2D` `albedo_texture`
+### :round_pushpin: `sampler2D` `albedo_texture`
 
 The texture image to be applied to the model.
 
@@ -121,29 +121,29 @@ Incompatible macros:
 - `SHINY`
 - `TEXTURE_DISABLED`
 
-### 📍 `bool` `albedo_texture_as_primary_color`
+### :round_pushpin: `bool` `albedo_texture_as_primary_color`
 
-Controls the mixing behavior between the model's texture and vertex colors. If `true`, decreasing the 📍 `mix_factor` value reduces the visibility of the vertex colors; otherwise, it reduces the visibility of the texture.
-
-Incompatible macros:
-- `ALPHA_SCISSOR`
-- `SHINY`
-- `TEXTURE_DISABLED`
-
-### 📍 `float` `mix_factor`
-
-Controls the blending of the model's texture and vertex colors, depending on 📍 `albedo_texture_as_primary_color` to determine which of the two will be more visible when this value is decreased.
+Controls the mixing behavior between the model's texture and vertex colors. If `true`, decreasing the :round_pushpin: `mix_factor` value reduces the visibility of the vertex colors; otherwise, it reduces the visibility of the texture.
 
 Incompatible macros:
 - `ALPHA_SCISSOR`
 - `SHINY`
 - `TEXTURE_DISABLED`
 
-### 📍 `float` `cull_distance_override`
+### :round_pushpin: `float` `mix_factor`
 
-Controls the visible range of the model, relative to the current camera. A value of `0` means that the default, defined by the [🌎 `cull_distance`](#🌎-float-cull_distance) uniform, will be used instead.
+Controls the blending of the model's texture and vertex colors, depending on :round_pushpin: `albedo_texture_as_primary_color` to determine which of the two will be more visible when this value is decreased.
 
-### 📍 `vec2` `uv_offset`, `uv_scale`, `uv_scroll_speed`
+Incompatible macros:
+- `ALPHA_SCISSOR`
+- `SHINY`
+- `TEXTURE_DISABLED`
+
+### :round_pushpin: `float` `cull_distance_override`
+
+Controls the visible range of the model, relative to the current camera. A value of `0` means that the default, defined by the [:earth_americas: `cull_distance`](#earth_americas-float-cull_distance) uniform, will be used instead.
+
+### :round_pushpin: `vec2` `uv_offset`, `uv_scale`, `uv_scroll_speed`
 
 These control, respectively:
 - the offset of the model's texture
@@ -154,7 +154,7 @@ Incompatible macros:
 - `SHINY`
 - `TEXTURE_METAL`
 
-### 📍 `float` `alpha_scissor`
+### :round_pushpin: `float` `alpha_scissor`
 
 Semi-transparent areas of the model's texture, whose opacity (alpha value) is below the value of this uniform, will not be drawn.
 
@@ -168,7 +168,7 @@ Incompatible macros:
 - `TEXTURE_DISABLED`
 - `TEXTURE_METAL`
 
-### 📍 `int` `billboard_mode`
+### :round_pushpin: `int` `billboard_mode`
 
 Controls how the model rotates to face the current camera. Ranges from 0 to 2; `0` disables billboarding entirely, `1` enables billboarding, and `2` limits billboarding to the Y-axis.
 
@@ -180,7 +180,7 @@ This is primarily used in creating 3D sprites.
 Required macros:
 - `BILLBOARD`
 
-### 📍 `bool` `use_transform_scale`
+### :round_pushpin: `bool` `use_transform_scale`
 
 If `true`, scaling a model in billboard mode using the model's `scale` property will be enabled.
 
@@ -189,14 +189,14 @@ This is primarily used in creating 3D sprites.
 Required macros:
 - `BILLBOARD`
 
-### 📍 `float` `color_depth`, `glossiness`, `shadow_intensity`
+### :round_pushpin: `float` `color_depth`, `glossiness`, `shadow_intensity`
 
 These control the look of the model when its material uses a shader with the `SHINY` macro defined.
 
 Required macros:
 - `SHINY`
 
-## ⚡ Macros
+## :zap: Macros
 
 When none of the above uniforms suit your needs (for instance, you want to modify the shader `render_mode`), you can configure your own shader based on `common.gdshaderinc` using macros.
 
@@ -226,7 +226,7 @@ This is *entirely incompatible* with the `ALPHA_SCISSOR` macro.
 
 ### `ALPHA_SCISSOR`
 
-If defined, the [📍 `alpha_scissor`](#📍-float-alpha_scissor) uniform will be exposed by the shader.
+If defined, the [:round_pushpin: `alpha_scissor`](#round_pushpin-float-alpha_scissor) uniform will be exposed by the shader.
 
 ### `AMBIENT_LIGHT_DISABLED`
 
@@ -234,7 +234,7 @@ If defined in a shader, ambient lighting will be disabled on all models with thi
 
 ### `BILLBOARD`
 
-If defined, the [📍 `billboard_mode`](#📍-int-billboard_mode) and [📍 `use_transform_scale`](#📍-bool-use_transform_scale) uniforms will be exposed by the shader.
+If defined, the [:round_pushpin: `billboard_mode`](#round_pushpin-int-billboard_mode) and [:round_pushpin: `use_transform_scale`](#round_pushpin-bool-use_transform_scale) uniforms will be exposed by the shader.
 
 ### `BLEND_MODE`
 
@@ -256,7 +256,7 @@ Example:
 ```
 
 > [!NOTE]
-> This macro has *nothing to do with* [🌎 `cull_distance`](#🌎-float-cull_distance) and [📍 `cull_distance_override`](#📍-float-cull_distance_override); it simply modifies the shader's `render_mode`.
+> This macro has *nothing to do with* [:earth_americas: `cull_distance`](#earth_americas-float-cull_distance) and [:round_pushpin: `cull_distance_override`](#round_pushpin-float-cull_distance_override); it simply modifies the shader's `render_mode`.
 
 ### `FOG_DISABLED`
 
@@ -264,7 +264,7 @@ If defined in a shader, fog will be disabled on all models with this shader appl
 
 ### `OVERRIDE_VERTEX_SNAP_RESOLUTION`
 
-If defined in a shader (or at the top of `common.gdshaderinc`), the [🌎 `vertex_snap_resolution`](#🌎-ivec2-vertex_snap_resolution-optional) uniform will be used to determine the resolution of the internal vertex snapping grid for all models using this shader (or any shader including `common.gdshaderinc`).
+If defined in a shader (or at the top of `common.gdshaderinc`), the [:earth_americas: `vertex_snap_resolution`](#earth_americas-ivec2-vertex_snap_resolution-optional) uniform will be used to determine the resolution of the internal vertex snapping grid for all models using this shader (or any shader including `common.gdshaderinc`).
 
 ### `SHINY`
 
@@ -280,7 +280,7 @@ If defined in a shader, the ["metallic" effect](#metallic_opaquetransparentgdsha
 
 ### `TEXTURE_REPEAT` (1.1.0+)
 
-If defined in a shader, texture repeat will be enabled for the albedo texture on all models with this shader. Depending on the model, this may cause visible seams to appear around the edges when [🌎 `texture_filtering`](#🌎-bool-texture_filtering) is `true`.
+If defined in a shader, texture repeat will be enabled for the albedo texture on all models with this shader. Depending on the model, this may cause visible seams to appear around the edges when [:earth_americas: `texture_filtering`](#earth_americas-bool-texture_filtering) is `true`.
 
 ### `UNSHADED`
 

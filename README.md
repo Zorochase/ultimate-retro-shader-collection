@@ -7,7 +7,7 @@ A compilation of shaders designed to replicate the graphical style of the PlaySt
 
 ---
 
-## 📋 Overview
+## :clipboard: Overview
 
 Ultimate Retro Shader Collection (**URSC**) is a unification and enhancement of various "retro-3D" shaders sourced from the Godot community. These shaders are essential for creating authentic graphics reminiscent of the *PlayStation* (PSX) or *Nintendo 64* (N64).
 
@@ -48,7 +48,7 @@ This repository is home to the collection itself and an interactive demo. You ca
   - does not support the above controls for toggling fullscreen. To toggle fullscreen, you must use your browser's provided controls. On Itch, a button to enable fullscreen is provided.
   - does not support the above control for toggling the menu.
 
-## 📖 Documentation
+## :book: Documentation
 
 Check out these articles from the Godot documentation before getting started with URSC. Also, while reading, feel free to experiment with the demo source code by cloning this repository!
 - [Available 3D Formats](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html)
@@ -62,7 +62,7 @@ When you feel comfortable working with shaders in Godot, you can read up on URSC
 - [URSC `canvas_item` Shaders](docs/canvas_item_shaders.md)
 - [Tips and Tricks](docs/tips_and_tricks.md)
 
-## 😎 Credits
+## :sunglasses: Credits
 
 Of course, this collection would not've been possible without the amazing work done by:
 

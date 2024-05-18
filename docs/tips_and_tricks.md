@@ -2,7 +2,7 @@
 
 Here you'll find some useful tips for creating graphics for a retro-3D game.
 
-## 🎲 Models
+## :game_die: Models
 
 Keep your models low-poly, but consider subdividing textured surfaces to mitigate the warping caused by affine texture mapping.
 
@@ -13,15 +13,15 @@ Certain URSC shaders require models to be either flat-shaded or smooth-shaded. W
 Godot, and subsequently URSC, do not directly expose this property. Instead, you must set it in your modeling program. If you're using Blender to create your models, you can set this by right-clicking your model in Object Mode and choosing **Shade Smooth** for smooth shading or **Shade Flat** for flat shading. You can also control this property per-face by right-clicking on the face on Edit Mode.
 Check out [this page from the Blender documentation](https://docs.blender.org/manual/en/latest/scene_layout/object/editing/shading.html#shade-smooth) to learn more.
 
-## 🖼️ Textures
+## :framed_picture: Textures
 
 Similar to models, keep your textures low-resolution. Make them especially low-resolution if you're going for the N64 look, as this helps the 3-point texture filtering stand out.
 
 Also, [@sodaraptor_dev](https://twitter.com/sodaraptor_dev) has a [post on Twitter](https://twitter.com/sodaraptor_dev/status/1672759372319956998) which shows how you can use Photoshop to quantize and dither your textures (`dither.gdshader` included in the collection isn't designed for use with model textures). He's made a number of awesome games you should play if you need some more inspiration!
 
-See [⚙️ Project Settings](#⚙️-project-settings) below for some import settings you should change regarding textures.
+See [:gear: Project Settings](#gear-project-settings) below for some import settings you should change regarding textures.
 
-## 💡 Lighting
+## :bulb: Lighting
 
 The key to lighting a scene for a retro-3D game is to *avoid relying on real-time lighting with `Light3D` nodes and shadows*. Both the PSX and the N64 had limited real-time lighting support, so artists used *vertex colors* to feign lighting in a scene.
 
@@ -31,7 +31,7 @@ Here's a comparison using Godot 3, which has vertex-based lighting. On the left,
 
 ![Lighting Comparison](images/lighting_comparison.png)
 
-## 🖌️ Vertex Colors
+## :paintbrush: Vertex Colors
 
 As mentioned above, vertex colors can be used to simulate lighting. However, their utility extends beyond that. In many games, vertex colors served as a substitute for "texturing" characters, props, etc.
 
@@ -52,7 +52,7 @@ Here are some select shots of *Spyro the Dragon* from the [incredible album](htt
 
 ![Spyro 4](images/spyro_4.png)
 
-## ⚙️ Project Settings
+## :gear: Project Settings
 
 Here are some settings I recommend changing in the **Project Settings** menu. These are not mandatory changes, but they will help you set up your project for the retro look:
 
@@ -75,7 +75,7 @@ Here are some settings I recommend changing in the **Project Settings** menu. Th
     - Snap 2D Vertices to Pixel: `ON`
   - **Shading**:
     - **Overrides**:
-      - Force Vertex Shading: `ON` (no effect yet 😔)
+      - Force Vertex Shading: `ON` (no effect yet :pensive:)
       - Force Lambert over Burley: `ON`
       - The above two settings are enforced in `common.gdshader`; I just like to set these so models I don't bother applying shaders to (models for testing purposes) still look mostly the same.
 
