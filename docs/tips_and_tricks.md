@@ -67,7 +67,7 @@ Here are some settings I recommend changing in the **Project Settings** menu. Th
 - Under **Rendering**:
   - **Textures**:
     - Default Texture Filter: `Nearest`
-    - Default Texture Repeat: this is actually set automatically in `common.gdshader` to `repeat_enable`, so changing this won't affect any models with a shader from the collection.
+    - Default Texture Repeat: this is set automatically in `common.gdshader` to `repeat_disable` (`repeat_enable` prior to version 1.1.0), so changing this won't affect any models with a shader from the collection. If you need texture repeat enabled for your model(s), define the `TEXTURE_REPEAT` macro at the top of `common.gdshaderinc` or in a custom shader file. See [⚡ Macros](spatial_shaders.md/#⚡-macros) for more information.
     - Force PNG: `ON`
     - Anisotropic Filtering Level: `0`
   - **2D**:
