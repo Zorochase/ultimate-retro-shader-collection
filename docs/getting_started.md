@@ -1,4 +1,4 @@
-# 🚀 Getting Started
+# :rocket: Getting Started
 
 You can download URSC as a standalone zip file by heading to [Releases](https://github.com/Zorochase/ultimate-retro-shader-collection/releases).
 
