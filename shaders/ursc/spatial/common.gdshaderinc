@@ -100,7 +100,7 @@ global uniform float cull_distance;
 	uniform bool use_transform_scale = true;
 #endif
 
-uniform float cull_distance_override: hint_range(0.0, 256.0, 8.0) = 0;
+uniform float cull_distance_override: hint_range(0.0, 1024.0, 8.0) = 0;
 
 
 // Varyings
