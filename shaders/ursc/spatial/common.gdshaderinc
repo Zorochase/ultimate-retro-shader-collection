@@ -75,11 +75,11 @@ global uniform float cull_distance;
 	uniform sampler2D albedo_texture :
 		source_color,
 		filter_nearest,
-	#if defined(TEXTURE_REPEAT)
-		repeat_enable;
-	#else
-		repeat_disable;
-	#endif
+		#if defined(TEXTURE_REPEAT)
+			repeat_enable;
+		#else
+			repeat_disable;
+		#endif
 
 	#if (defined(ALPHA_SCISSOR) && !defined(SHINY) && !defined(TEXTURE_METAL))
 		uniform float alpha_scissor : hint_range(0, 1, 0.01) = 0.1;
