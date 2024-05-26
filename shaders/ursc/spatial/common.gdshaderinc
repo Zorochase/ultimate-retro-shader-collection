@@ -89,7 +89,7 @@ global uniform float cull_distance;
 		uniform float mix_factor: hint_range(0.0, 1.0, 0.01) = 1.0;
 	#endif
 
-	uniform float texture_lod_halve_distance_override : hint_range(0.0, 1024.0, 8.0) = 0;
+	uniform float texture_lod_halve_distance_override : hint_range(0.0, 32.0, 2.0) = 0;
 
 	#if !defined(TEXTURE_METAL)
 		uniform vec2 uv_offset = vec2(0.0);
@@ -103,7 +103,7 @@ global uniform float cull_distance;
 	uniform bool use_transform_scale = true;
 #endif
 
-uniform float cull_distance_override: hint_range(0.0, 1024.0, 8.0) = 0;
+uniform float cull_distance_override: hint_range(0.0, 1024.0, 2.0) = 0;
 
 
 // Varyings
