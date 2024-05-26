@@ -33,6 +33,10 @@ window/stretch/scale_mode="integer"
 
 project/assembly_name="Ultimate Retro Shader Collection Demo"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg")
+
 [filesystem]
 
 import/blender/enabled=false
