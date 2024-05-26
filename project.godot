@@ -182,3 +182,7 @@ vertex_snap_resolution={
 "type": "ivec2",
 "value": Vector2i(160, 120)
 }
+texture_lod_halve_distance={
+"type": "float",
+"value": 0.0
+}

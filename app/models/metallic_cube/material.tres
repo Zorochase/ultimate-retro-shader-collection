@@ -9,5 +9,6 @@ shader = ExtResource("1_l47g5")
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/albedo_texture_as_primary_color = true
 shader_parameter/mix_factor = 1.0
+shader_parameter/texture_lod_halve_distance_override = 0.0
 shader_parameter/cull_distance_override = 0.0
 shader_parameter/albedo_texture = ExtResource("2_4o3oi")

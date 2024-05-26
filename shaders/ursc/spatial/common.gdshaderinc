@@ -49,6 +49,7 @@ shadows_disabled;
 	#endif
 
 	global uniform bool texture_filtering;
+	global uniform float texture_lod_halve_distance;
 #endif
 
 #if defined(OVERRIDE_VERTEX_SNAP_RESOLUTION)
@@ -88,6 +89,8 @@ global uniform float cull_distance;
 		uniform float mix_factor: hint_range(0.0, 1.0, 0.01) = 1.0;
 	#endif
 
+	uniform float texture_lod_halve_distance_override : hint_range(0.0, 1024.0, 8.0) = 0;
+
 	#if !defined(TEXTURE_METAL)
 		uniform vec2 uv_offset = vec2(0.0);
 		uniform vec2 uv_scale = vec2(1.0);
@@ -108,6 +111,9 @@ uniform float cull_distance_override: hint_range(0.0, 1024.0, 8.0) = 0;
 	varying float position_w;
 #endif
 
+#if !defined(TEXTURE_DISABLED) && !defined(SHINY)
+	varying flat int should_halve_texture_lod;
+#endif
 
 // Functions
 #if defined(SHINY)
@@ -205,6 +211,18 @@ void vertex()
 	#endif
 
 	float vertex_distance = length((MODELVIEW_MATRIX * vec4(VERTEX, 1.0)));
+
+	#if !defined(TEXTURE_DISABLED) && !defined(SHINY)
+		float actual_texture_lod_halve_distance =
+			texture_lod_halve_distance_override > 0.0
+				? texture_lod_halve_distance_override
+				: texture_lod_halve_distance;
+
+		should_halve_texture_lod = (
+			!texture_filtering &&
+			actual_texture_lod_halve_distance > 0.0 &&
+			vertex_distance > actual_texture_lod_halve_distance) ? 1 : 0;
+	#endif
 
 	float actual_cull_distance =
 		cull_distance_override > 0.0 ? cull_distance_override : cull_distance;
@@ -307,10 +325,20 @@ void fragment()
 
 			vec4 sampled_color;
 
-			if (texture_filtering)
-				sampled_color = albedoTextureFiltered(uv);
+			if (should_halve_texture_lod == 1)
+			{
+				vec2 half_albedo_texture_size = vec2(textureSize(albedo_texture, 0)) * 0.5;
+				vec2 new_uv = floor(uv * half_albedo_texture_size) / half_albedo_texture_size;
+
+				sampled_color = texture(albedo_texture, new_uv);
+			}
 			else
-				sampled_color = texture(albedo_texture, uv);
+			{
+				if (texture_filtering)
+					sampled_color = albedoTextureFiltered(uv);
+				else
+					sampled_color = texture(albedo_texture, uv);
+			}
 
 			#if (defined(ALPHA_SCISSOR) && !defined(SHINY) && !defined(TEXTURE_METAL))
 				ALBEDO = albedo_color.rgb * sampled_color.rgb;
