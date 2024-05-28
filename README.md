@@ -72,3 +72,5 @@ Of course, this collection would not've been possible without the amazing work d
   - This collection derives from his [PSX](https://github.com/MenacingMecha/godot-psx-style-demo) and [N64](https://github.com/MenacingMecha/godot-n64-shader-demo) shaders. If you need inspiration for creating your own retro-3D game, definitely have a look at his work!
 - [Zacksly](https://zacksly.itch.io/)
   - The "shiny" effect comes from their [PSX Pickup Shader](https://zacksly.itch.io/psx-pickup-shader) for Godot 3.
+- [tentabrobpy](https://godotshaders.com/author/tentabrobpy/)
+  - The "flat sky" effect was adapted from [their shader on Godot Shaders](https://godotshaders.com/shader/n64-style-skybox/).
