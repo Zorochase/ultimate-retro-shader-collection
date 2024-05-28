@@ -103,7 +103,7 @@ Incompatible macros:
 
 ### :earth_americas: `float` `texture_lod_halve_distance` (1.2.0+)
 
-Controls the distance from the current camera at which the texture level of detail (LOD) for a given surface on any model is halved. When set to `0`, the texture LOD remains constant regardless of the surface's distance from the camera, unless [:round_pushpin: `texture_lod_halve_distance_override`]() is configured. If [:round_pushpin: `texture_filtering`](#earth_americas-bool-texture_filtering) is set to `true`, both of these uniforms will be disregarded, and the texture LOD effect will be disabled.
+Controls the distance from the current camera at which the texture level of detail (LOD) for a given surface on any model is halved. When set to `0`, the texture LOD remains constant regardless of the surface's distance from the camera, unless [:round_pushpin: `texture_lod_halve_distance_override`]() is configured. If [:earth_americas: `texture_filtering`](#earth_americas-bool-texture_filtering) is set to `true`, both of these uniforms will be disregarded, and the texture LOD effect will be disabled.
 
 Incompatible macros:
 - `SHINY`
@@ -169,7 +169,7 @@ Controls the visible range of the model, relative to the current camera. A value
 
 ### :round_pushpin: `float` `texture_lod_halve_distance_override` (1.2.0+)
 
-Controls the distance from the current camera at which the texture level of detail (LOD) for a given surface on the model is halved. When set to `0`, the texture LOD remains constant regardless of the surface's distance from the camera, unless [:earth_americas: `texture_lod_halve_distance`](#earth_americas-float-texture_lod_halve_distance) is configured. If [:round_pushpin: `texture_filtering`](#earth_americas-bool-texture_filtering) is set to `true`, both of these uniforms will be disregarded, and the texture LOD effect will be disabled.
+Controls the distance from the current camera at which the texture level of detail (LOD) for a given surface on the model is halved. When set to `0`, the texture LOD remains constant regardless of the surface's distance from the camera, unless [:earth_americas: `texture_lod_halve_distance`](#earth_americas-float-texture_lod_halve_distance) is configured. If [:earth_americas: `texture_filtering`](#earth_americas-bool-texture_filtering) is set to `true`, both of these uniforms will be disregarded, and the texture LOD effect will be disabled.
 
 Incompatible macros:
 - `SHINY`
