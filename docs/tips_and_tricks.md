@@ -17,7 +17,9 @@ Check out [this page from the Blender documentation](https://docs.blender.org/ma
 
 Similar to models, keep your textures low-resolution. Make them especially low-resolution if you're going for the N64 look, as this helps the 3-point texture filtering stand out.
 
-Also, [@sodaraptor_dev](https://twitter.com/sodaraptor_dev) has a [post on Twitter](https://twitter.com/sodaraptor_dev/status/1672759372319956998) which shows how you can use Photoshop to quantize and dither your textures (`dither.gdshader` included in the collection isn't designed for use with model textures). He's made a number of awesome games you should play if you need some more inspiration!
+[Screaming Brain Studios on itch.io](https://screamingbrainstudios.itch.io) has uploaded a plethora of seamless, low-resolution texture packs, which you can download completely for free!
+
+Also, [@sodaraptor_dev has a post on twitter](https://twitter.com/sodaraptor_dev/status/1672759372319956998) which shows how you can use Photoshop to quantize and dither your textures (`dither.gdshader` included in the collection isn't designed for use with model textures). He's made a number of awesome games you should play if you need some more inspiration!
 
 See [:gear: Project Settings](#gear-project-settings) below for some import settings you should change regarding textures.
 

@@ -13,13 +13,14 @@ You can download URSC as a standalone zip file by heading to [Releases](https://
 
 After downloading, extract the zip file into your project. The `ursc` folder extracted from the zip will contain the complete collection, including the license.
 
-Next, you'll need to add a few [global uniforms](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html#global-uniforms). These uniforms are *mandatory* for the `spatial` shaders to work correctly:
+Next, you'll need to add a few [global uniforms](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html#global-uniforms). These uniforms are *mandatory* for the `spatial` shaders to work correctly, regardless of the look you're going for (however, the default values you choose are entirely up to you):
 
 | Name                         | Type    | Default Value |
 | ---------------------------- | -----   | ------------- |
 | `affine_texture_mapping`     | `bool`  | `true`        |
 | `cull_distance`              | `float` | `64`          |
 | `texture_filtering`          | `bool`  | `false`       |
+| `texture_lod_halve_distance` | `float` | `0`           |
 | `vertex_snap_intensity`      | `int`   | `2`           |
 
 You should now be able to use the shaders in your project!
