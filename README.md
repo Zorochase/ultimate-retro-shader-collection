@@ -17,13 +17,15 @@ This repository is home to the collection itself and an interactive demo. You ca
 - Vertex snapping (a.k.a. *vertex jitter*)
 - Affine texture mapping (a.k.a. *texture warping*)
 - 3-point texture filtering (as seen on N64)
+- Distance-based texture LOD (as seen in some PSX games) (1.2.0+)
 - Special "metallic/reflective" and "shiny/glossy" effects
 - Basic customization through a wide range of uniforms
 - Detailed customization with macros
-- Bonus `canvas_item` shaders:
+- Bonus shaders:
   - PSX-like additive/subtractive fade
   - Color reduction with dithering
-- Supports all [rendering methods](https://docs.godotengine.org/en/stable/contributing/development/core_and_modules/internal_rendering_architecture.html#rendering-methods) (`Forward+`, `Mobile`, and `Compatibility`) (1.1.0+)
+  - Single-image, flat sky (1.2.0+)
+- Support for all [rendering methods](https://docs.godotengine.org/en/stable/contributing/development/core_and_modules/internal_rendering_architecture.html#rendering-methods) (`Forward+`, `Mobile`, and `Compatibility`) (1.1.0+)
 
 ### Demo Features:
 - A variety of samples
