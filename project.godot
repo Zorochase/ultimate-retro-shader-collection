@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Ultimate Retro Shader Collection Demo"
 config/description="This is a demo project for the Ultimate Retro Shader Collection."
-config/version="1.1.0"
+config/version="1.2.0"
 run/main_scene="res://app/app.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.2", "Forward Plus")
