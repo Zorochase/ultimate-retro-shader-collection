@@ -76,9 +76,9 @@ URSC `spatial` shaders offer a wide range of uniforms, which, in most cases, wil
 As previously explained, `common.gdshaderinc` utilizes macros to determine which uniforms a given shader exposes. Reading onward, note that a list of required or incompatible macros indicates whether the macros must or must not be defined in a shader file for the uniform to be exposed by that shader. A complete list of macros recognized by `common.gdshaderinc` can be found [here](#zap-macros).
 
 > [!NOTE]
-> ":earth_americas:" represents *global* uniforms (defined in Project Settings).
+> :earth_americas: represents *global* uniforms (defined in Project Settings).
 >
-> ":round_pushpin:" represents per-material (*local*) uniforms.
+> :round_pushpin: represents per-material (*local*) uniforms.
 
 ### :earth_americas: `bool` `affine_texture_mapping`
 
