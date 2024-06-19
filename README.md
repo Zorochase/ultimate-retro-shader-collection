@@ -45,7 +45,7 @@ When you feel comfortable working with shaders in Godot, you can read up on URSC
 - [URSC `canvas_item` Shaders](docs/canvas_item_shaders.md)
 - [Tips and Tricks](docs/tips_and_tricks.md)
 
-## :question::exclamation: Need help? Have an idea?
+## :question: Need help? Have an idea?
 
 Please **do not** open an issue unless you've actually found something wrong! If you need help using the shaders, have an idea you want to talk about, or want to show off something you've made with the collection, visit the [Discussions](https://github.com/Zorochase/ultimate-retro-shader-collection/discussions) page!
 
