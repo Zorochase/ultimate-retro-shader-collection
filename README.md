@@ -11,7 +11,14 @@ A compilation of shaders designed to replicate the graphical style of the PlaySt
 
 Ultimate Retro Shader Collection (**URSC**) is a unification and enhancement of various "retro-3D" shaders sourced from the Godot community. These shaders are essential for creating authentic graphics reminiscent of the *PlayStation* (PSX) or *Nintendo 64* (N64).
 
-If you'd like to get a feel for what the collection has to offer, [a demo project](https://github.com/Zorochase/ultimate-retro-shader-collection-demo) exists, which you can even play right in your browser on [itch.io](https://zorochase.itch.io/ultimate-retro-shader-collection-for-godot)! When you're ready to integrate URSC into your project, you can download it as a standalone zip file on itch.io (the same page as the demo, just scroll down) or from [Releases](https://github.com/Zorochase/ultimate-retro-shader-collection/releases).
+If you'd like to get a feel for what the collection has to offer, [a demo project](https://github.com/Zorochase/ultimate-retro-shader-collection-demo) exists, which you can even play right in your browser on [itch.io](https://zorochase.itch.io/ultimate-retro-shader-collection-for-godot)!
+
+When you're ready to integrate URSC into your project, there are a few places you can download it from:
+- the [Releases](https://github.com/Zorochase/ultimate-retro-shader-collection/releases) page here on GitHub
+- the itch.io page (the same one as the demo, just scroll down)
+- the [Godot Asset Library](https://godotengine.org/asset-library/asset/2989)
+
+All of these sources will host the latest version of the collection.
 
 ### Features:
 - Vertex snapping (a.k.a. *vertex jitter*)

@@ -1,6 +1,9 @@
 # :rocket: Getting Started
 
-You can download URSC as a standalone zip file by heading to [Releases](https://github.com/Zorochase/ultimate-retro-shader-collection/releases).
+When you're ready to integrate URSC into your project, there are a few places you can download it from:
+- the [Releases](https://github.com/Zorochase/ultimate-retro-shader-collection/releases) page here on GitHub
+- the [itch.io](https://zorochase.itch.io/ultimate-retro-shader-collection-for-godot) page
+- the [Godot Asset Library](https://godotengine.org/asset-library/asset/2989)
 
 > [!IMPORTANT]
 > Be sure to download the version of the collection that corresponds to the version of Godot you are using. You'll see the Godot version in the name of the zip file.
