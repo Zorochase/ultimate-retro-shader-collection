@@ -1,0 +1,93 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Ultimate Retro Shader Collection"
+config/description="This is the development repository for the Ultimate Retro Shader Collection."
+config/version="1.2.0"
+run/main_scene="res://playground/playground.tscn"
+config/use_custom_user_dir=true
+config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="res://docs/images/logo.png"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
+window/stretch/scale_mode="integer"
+
+[filesystem]
+
+import/blender/enabled=false
+
+[importer_defaults]
+
+animation_library={
+"animation/fps": 24.0
+}
+scene={
+"animation/fps": 24.0,
+"meshes/create_shadow_meshes": false,
+"meshes/ensure_tangents": false,
+"meshes/generate_lods": false,
+"meshes/light_baking": 0
+}
+texture={
+"detect_3d/compress_to": 0
+}
+3d_texture={
+"compress/mode": 0
+}
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+shading/overrides/force_vertex_shading=true
+shading/overrides/force_lambert_over_burley=true
+textures/default_filters/anisotropic_filtering_level=0
+textures/decals/filter=0
+textures/light_projectors/filter=0
+environment/defaults/default_clear_color=Color(0.247059, 0.247059, 0.247059, 1)
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
+environment/defaults/default_environment="res://default_environment.tres"
+
+[shader_globals]
+
+affine_texture_mapping={
+"type": "bool",
+"value": true
+}
+vertex_snap_intensity={
+"type": "int",
+"value": 0
+}
+texture_filtering={
+"type": "bool",
+"value": false
+}
+cull_distance={
+"type": "float",
+"value": 64.0
+}
+vertex_snap_resolution={
+"type": "ivec2",
+"value": Vector2i(160, 120)
+}
+texture_lod_halve_distance={
+"type": "float",
+"value": 0.0
+}

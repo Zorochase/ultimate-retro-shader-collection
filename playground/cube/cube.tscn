@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ho7rpmwps6nq"]
+
+[ext_resource type="ArrayMesh" uid="uid://cq3ij5hudqpna" path="res://playground/cube/cube.obj" id="1_y7xk5"]
+[ext_resource type="Material" uid="uid://yae3m1fg46v3" path="res://playground/cube/material.tres" id="2_rb71u"]
+
+[node name="Cube" type="MeshInstance3D"]
+mesh = ExtResource("1_y7xk5")
+surface_material_override/0 = ExtResource("2_rb71u")
