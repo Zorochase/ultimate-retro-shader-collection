@@ -16,7 +16,9 @@ When you're ready to integrate URSC into your project, there are a few places yo
 
 After downloading, extract the zip file into your project. The `ursc` folder extracted from the zip will contain the complete collection, including the license.
 
-Next, you'll need to add a few [global uniforms](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html#global-uniforms). These uniforms are *mandatory* for the `spatial` shaders to work correctly, regardless of the look you're going for (however, the default values you choose are entirely up to you):
+Next, you'll need to set up the following [global uniforms](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html#global-uniforms). These uniforms are *mandatory* for the shaders to work correctly, regardless of the look you're going for (though their default values are entirely up to you).
+
+You can plug them into ProjectSettings manually, or, for quicker setup, run the `setup.gd` script included in the zip file (1.2.0+).
 
 | Name                         | Type    | Default Value |
 | ---------------------------- | -----   | ------------- |

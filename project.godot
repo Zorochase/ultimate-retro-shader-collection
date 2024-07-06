@@ -71,23 +71,19 @@ affine_texture_mapping={
 "type": "bool",
 "value": true
 }
-vertex_snap_intensity={
-"type": "int",
-"value": 0
+cull_distance={
+"type": "float",
+"value": 64.0
 }
 texture_filtering={
 "type": "bool",
 "value": false
 }
-cull_distance={
-"type": "float",
-"value": 64.0
-}
-vertex_snap_resolution={
-"type": "ivec2",
-"value": Vector2i(160, 120)
-}
 texture_lod_halve_distance={
 "type": "float",
 "value": 0.0
+}
+vertex_snap_intensity={
+"type": "int",
+"value": 2
 }
