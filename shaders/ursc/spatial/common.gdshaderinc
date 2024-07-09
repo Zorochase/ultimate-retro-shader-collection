@@ -105,6 +105,8 @@ global uniform float cull_distance;
 
 uniform float cull_distance_override: hint_range(0.0, 1024.0, 2.0) = 0;
 
+uniform bool convert_vertex_colors = false;
+
 
 // Varyings
 #if !defined(TEXTURE_DISABLED) && !defined(TEXTURE_METAL) && !defined(SHINY)
@@ -173,6 +175,9 @@ uniform float cull_distance_override: hint_range(0.0, 1024.0, 2.0) = 0;
 
 void vertex()
 {
+	if (convert_vertex_colors)
+		COLOR.rgb = pow(COLOR.rgb, vec3(1.0 / 2.2));
+
 	#if !defined(TEXTURE_DISABLED) && !defined(TEXTURE_METAL) && !defined(SHINY)
 		UV = UV * uv_scale + uv_offset + (uv_scroll_speed * TIME);
 	#endif

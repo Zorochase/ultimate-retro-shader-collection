@@ -228,6 +228,14 @@ These control the look of the model when its material uses a shader with the `SH
 Required macros:
 - `SHINY`
 
+### :round_pushpin: `bool` `convert_vertex_colors`
+
+When working with certain model formats, particularly `glb`/`gltf`, in the `Compatibility` renderer, vertex colors might appear incorrect due to being exported in linear color space. For these formats, where manually specifying sRGB for vertex colors isn't an option, setting this to `true` will correct the colors.
+
+You can usually tell your colors need to be converted if they appear significantly darker without any additional lighting than they do in your modeling program.
+
+This parameter should be left `false` when using the `Forward+` or `Mobile` renderers.
+
 ## :zap: Macros
 
 When none of the above uniforms suit your needs (for instance, you want to modify the shader `render_mode`), you can configure your own shader based on `common.gdshaderinc` using macros.
