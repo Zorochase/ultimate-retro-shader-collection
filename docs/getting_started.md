@@ -20,15 +20,15 @@ Next, you'll need to set up the following [global uniforms](https://docs.godoten
 
 For quick setup, run the `setup.gd` script included in the zip file (1.2.0+). You can also plug these values in manually.
 
-| Name                         | Type    | Default Value |
-| ---------------------------- | -----   | ------------- |
-| `affine_texture_mapping`     | `bool`  | `true`        |
-| `cull_distance`              | `float` | `64`          |
-| `fog_color`                  | `color` | `black`       |
-| `fog_start_distance`         | `color` | `0`           |
-| `fog_end_distance`           | `color` | `0`           |
-| `texture_filtering`          | `bool`  | `false`       |
-| `texture_lod_halve_distance` | `float` | `0`           |
-| `vertex_snap_intensity`      | `int`   | `2`           |
+| Name                         | Type    | Default Value | Necessary If Using |
+| ---------------------------- | -----   | ------------- | ------------------ |
+| `affine_texture_mapping`     | `bool`  | `true`        | v1.0.0+            |
+| `cull_distance`              | `float` | `64`          | v1.0.0+            |
+| `fog_color`                  | `color` | `black`       | v1.3.0+            |
+| `fog_start_distance`         | `color` | `0`           | v1.3.0+            |
+| `fog_end_distance`           | `color` | `0`           | v1.3.0+            |
+| `texture_filtering`          | `bool`  | `false`       | v1.0.0+            |
+| `texture_lod_halve_distance` | `float` | `0`           | v1.2.0+            |
+| `vertex_snap_intensity`      | `int`   | `2`           | v1.0.0+            |
 
 You should now be able to use the shaders in your project!
