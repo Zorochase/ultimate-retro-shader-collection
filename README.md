@@ -24,11 +24,12 @@ All of these sources will host the latest version of the collection.
 - Vertex snapping (a.k.a. *vertex jitter*)
 - Affine texture mapping (a.k.a. *texture warping*)
 - 3-point texture filtering (as seen on N64)
-- Distance-based texture LOD (as seen in some PSX games) (1.2.0+)
 - Special "metallic/reflective" and "shiny/glossy" effects
-- Customization through a wide range of uniforms and macros
-- Screen-reading color reduction with dithering and additive/subtractive fade effects
+- Distance-based texture LOD (as seen in some PSX games) (1.2.0+)
+- Distance-based, per-vertex fog (1.3.0+)
 - Single-image, flat sky (1.2.0+)
+- Screen-reading color reduction with dithering and additive/subtractive fade effects
+- Customization through a wide range of uniforms and macros
 - Support for all [rendering methods](https://docs.godotengine.org/en/stable/contributing/development/core_and_modules/internal_rendering_architecture.html#rendering-methods) (`Forward+`, `Mobile`, and `Compatibility`) (1.1.0+)
 
 ## :book: Documentation

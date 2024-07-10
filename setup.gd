@@ -1,4 +1,4 @@
-# Ultimate Retro Shader Collection (v1.2.0): Setup Script
+# Ultimate Retro Shader Collection (v1.3.0): Setup Script
 #
 # This script will add the necessary shader globals for URSC shaders to your project.godot file.
 # To run, just click File -> Run.

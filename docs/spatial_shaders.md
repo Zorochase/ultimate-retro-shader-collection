@@ -93,7 +93,7 @@ Incompatible macros:
 
 Controls the visible range of all models, relative to the current camera. When set to `0`, shader-based culling is disabled, unless [:round_pushpin: `cull_distance_override`](#round_pushpin-float-cull_distance_override) is configured.
 
-### :earth_americas: `vec3` `fog_color`, `float` `fog_start_distance`, `fog_end_distance`
+### :earth_americas: `vec3` `fog_color`, `float` `fog_start_distance`, `fog_end_distance` (1.3.0+)
 
 These control, respectively:
 - the color of the custom fog
@@ -241,7 +241,7 @@ These control the look of the model when its material uses a shader with the `SH
 Required macros:
 - `SHINY`
 
-### :round_pushpin: `bool` `convert_vertex_colors`
+### :round_pushpin: `bool` `convert_vertex_colors` (1.3.0+)
 
 When working with certain model formats, particularly `glb`/`gltf`, in the `Compatibility` renderer, vertex colors might appear incorrect due to being exported in linear color space. For these formats, where manually specifying sRGB for vertex colors isn't an option, setting this to `true` will correct the colors.
 
@@ -342,7 +342,7 @@ If defined, lighting provided by any `Light3D` node (`DirectionalLight3D`, `Omni
 > [!NOTE]
 > *This does not disable ambient light or fog*. For those, define [`AMBIENT_LIGHT_DISABLED`](#ambient_light_disabled) and [`FOG_DISABLED`](#fog_disabled).
 
-### `USE_ENVIRONMENT_FOG`
+### `USE_ENVIRONMENT_FOG` (1.3.0+)
 
 If defined at the top of `common.gdshaderinc`, URSC's custom fog implementation will be disabled, allowing you to control fog using a WorldEnvironment node instead.
 
