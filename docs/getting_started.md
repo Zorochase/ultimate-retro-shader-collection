@@ -18,12 +18,15 @@ After downloading, extract the zip file into your project. The `ursc` folder ext
 
 Next, you'll need to set up the following [global uniforms](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html#global-uniforms). These uniforms are *mandatory* for the shaders to work correctly, regardless of the look you're going for (though their default values are entirely up to you).
 
-You can plug them into ProjectSettings manually, or, for quicker setup, run the `setup.gd` script included in the zip file (1.2.0+).
+For quick setup, run the `setup.gd` script included in the zip file (1.2.0+). You can also plug these values in manually.
 
 | Name                         | Type    | Default Value |
 | ---------------------------- | -----   | ------------- |
 | `affine_texture_mapping`     | `bool`  | `true`        |
 | `cull_distance`              | `float` | `64`          |
+| `fog_color`                  | `color` | `black`       |
+| `fog_start_distance`         | `color` | `0`           |
+| `fog_end_distance`           | `color` | `0`           |
 | `texture_filtering`          | `bool`  | `false`       |
 | `texture_lod_halve_distance` | `float` | `0`           |
 | `vertex_snap_intensity`      | `int`   | `2`           |

@@ -15,6 +15,18 @@ var shader_globals := {
 		"type": "bool",
 		"value": true
 	},
+	"fog_color": {
+		"type": "color",
+		"value": Color(0, 0, 0, 1)
+	},
+	"fog_start_distance": {
+		"type": "float",
+		"value": 0.0
+	},
+	"fog_end_distance": {
+		"type": "float",
+		"value": 0.0
+	},
 	"cull_distance": {
 		"type": "float",
 		"value": 64.0

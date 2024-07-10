@@ -93,6 +93,19 @@ Incompatible macros:
 
 Controls the visible range of all models, relative to the current camera. When set to `0`, shader-based culling is disabled, unless [:round_pushpin: `cull_distance_override`](#round_pushpin-float-cull_distance_override) is configured.
 
+### :earth_americas: `vec3` `fog_color`, `float` `fog_start_distance`, `fog_end_distance`
+
+These control, respectively:
+- the color of the custom fog
+- the custom fog's starting distance from the current camera
+- the custom fog's depth end distance from the current camera
+
+If `fog_start_distance` and `fog_end_distance` are both `0`, or `fog_start_distance` is less than `fog_end_distance`, no fog will be applied.
+
+Incompatible macros:
+- `FOG_DISABLED`
+- `USE_ENVIRONMENT_FOG`
+
 ### :earth_americas: `bool` `texture_filtering`
 
 If `true`, N64-style 3-point texture filtering will be enabled across all textured models.
@@ -328,3 +341,10 @@ If defined, lighting provided by any `Light3D` node (`DirectionalLight3D`, `Omni
 
 > [!NOTE]
 > *This does not disable ambient light or fog*. For those, define [`AMBIENT_LIGHT_DISABLED`](#ambient_light_disabled) and [`FOG_DISABLED`](#fog_disabled).
+
+### `USE_ENVIRONMENT_FOG`
+
+If defined at the top of `common.gdshaderinc`, URSC's custom fog implementation will be disabled, allowing you to control fog using a WorldEnvironment node instead.
+
+> [!NOTE]
+> URSC's fog is applied per-vertex, which is more friendly to the retro aesthetic. Godot's fog is per-pixel and, prior to 4.3, only exponential (you can't control the fog's start and end distances).
