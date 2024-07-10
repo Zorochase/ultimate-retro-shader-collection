@@ -238,6 +238,10 @@ void vertex()
 				(vertex_distance - fog_start_distance) / (fog_end_distance - fog_start_distance),
 				0.0, 1.0);
 		}
+		else
+		{
+			fog_mix_factor = 0.0;
+		}
 	#endif
 
 	#if !defined(TEXTURE_DISABLED) && !defined(SHINY)
