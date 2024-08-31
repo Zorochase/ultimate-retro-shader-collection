@@ -12,7 +12,9 @@ When you're ready to integrate URSC into your project, there are a few places yo
 > - `1.0.0` is the version of the shader collection.
 > - `4.2.2` is the version of Godot the shader collection was made with.
 >
-> So, you should only use URSC `1.0.0` with Godot `4.2.2`. Using different versions may result in broken shaders due to changes or missing features; therefore, they are *not supported!*
+> So, you should only use URSC `1.0.0` with Godot `4.2.2` or higher. Using older Godot versions may result in broken shaders due to missing features.
+>
+> The latest release, 1.3.0, supports Godot 4.2.2 and 4.3.0.
 
 After downloading, extract the zip file into your project. The `ursc` folder extracted from the zip will contain the complete collection, including the license.
 
