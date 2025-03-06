@@ -2,4 +2,4 @@ shader_type spatial;
 
 #define SHINY
 
-#include "common.gdshaderinc"
+#include "../common.gdshaderinc"

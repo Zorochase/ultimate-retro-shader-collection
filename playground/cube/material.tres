@@ -1,12 +1,13 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://yae3m1fg46v3"]
 
-[ext_resource type="Shader" path="res://shaders/ursc/spatial/standard_opaque.gdshader" id="1_2ltx4"]
+[ext_resource type="Shader" uid="uid://djgcfdm8l1rif" path="res://shaders/ursc/spatial/standard/standard_opaque.gdshader" id="1_ccxad"]
 [ext_resource type="Texture2D" uid="uid://sed1b00yvm2t" path="res://playground/cube/texture.png" id="2_t7biu"]
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_2ltx4")
+shader = ExtResource("1_ccxad")
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("2_t7biu")
 shader_parameter/albedo_texture_as_primary_color = true
 shader_parameter/mix_factor = 1.0
 shader_parameter/texture_lod_halve_distance_override = 0.0
@@ -15,4 +16,3 @@ shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_scroll_speed = Vector2(0, 0)
 shader_parameter/cull_distance_override = 0.0
 shader_parameter/convert_vertex_colors = false
-shader_parameter/albedo_texture = ExtResource("2_t7biu")
