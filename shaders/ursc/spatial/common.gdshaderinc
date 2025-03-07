@@ -187,10 +187,30 @@ uniform bool convert_vertex_colors = false;
 	}
 #endif
 
+// https://gamedev.stackexchange.com/a/194038
+vec3 fromLinear(vec3 linear_color)
+{
+	bvec3 cutoff = lessThan(linear_color.rgb, vec3(0.0031308));
+	vec3 higher = vec3(1.055) * pow(linear_color.rgb, vec3(1.0 / 2.4)) - vec3(0.055);
+	vec3 lower = linear_color.rgb * vec3(12.92);
+
+	return mix(higher, lower, cutoff);
+}
+
+// https://gamedev.stackexchange.com/a/194038
+vec3 toLinear(vec3 srgb_color)
+{
+	bvec3 cutoff = lessThan(srgb_color.rgb, vec3(0.04045));
+	vec3 higher = pow((srgb_color.rgb + vec3(0.055)) / vec3(1.055), vec3(2.4));
+	vec3 lower = srgb_color.rgb / vec3(12.92);
+
+	return mix(higher, lower, cutoff);
+}
+
 void vertex()
 {
 	if (convert_vertex_colors)
-		COLOR.rgb = pow(COLOR.rgb, vec3(1.0 / 2.2));
+		COLOR.rgb = fromLinear(COLOR.rgb);
 
 	#if !defined(TEXTURE_DISABLED) && !defined(TEXTURE_METAL) && !defined(SHINY)
 		UV = UV * uv_scale + uv_offset + (uv_scroll_speed * TIME);
@@ -398,6 +418,6 @@ void fragment()
 
 	#if !defined(FOG_DISABLED) && !defined(USE_ENVIRONMENT_FOG)
 		FOG.a = fog_mix_factor;
-		FOG.rgb = fog_color.rgb;
+		FOG.rgb = toLinear(fog_color.rgb);
 	#endif
 }
