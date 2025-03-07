@@ -2,5 +2,5 @@
 
 [resource]
 ambient_light_source = 2
-ambient_light_color = Color(0.752941, 0.752941, 0.752941, 1)
+ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 1
