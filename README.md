@@ -53,6 +53,31 @@ Of course, there's no need to "enable" URSC through the project settings menu, a
 URSC depends on a number of [global uniforms](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html#global-uniforms) which need to be added to your project settings. An [editor script](https://docs.godotengine.org/en/stable/classes/class_editorscript.html), `setup.gd` is provided with your download and can be executed through the editor to add these uniforms quickly.
 
 After running this script once (or adding the uniforms to project settings manually), you'll be ready to use URSC shaders in your project.
+
+## Upgrading From v1.3- to v1.4+
+
+In version 1.4.0, URSC's spatial shaders were organized into subfolders to make it easier to select them from the file system view. **This means attempting to upgrade by deleting the old version and copying in the new one _will_ break your materials!**
+
+In versions prior to 1.4.0, URSC's spatial shaders were all placed under the `ursc/spatial` directory, like so:
+
+![Old file organization](readme_images/old_file_organization.png)
+
+To upgrade safely, you must first reorganize the **existing shaders in your project** to match the layout of newer versions. This ensures the references to them in your materials (and anywhere else) are still valid after the upgrade, preventing you from needing to fix them all manually. Be sure to do any file moving and renaming **inside Godot**.
+
+![New file organization](readme_images/new_file_organization.png)
+
+Notice how the Basic shaders have been placed into their own subfolder -- you need to do this for the Basic, Metallic, Shiny, Sprite and Standard shaders. Leave `common.gdshaderinc` and `flat_sky.gdshader` where they are.
+
+After you've reorganized your existing shaders, you can download the latest version and copy over the new files.
+
+One last thing: in 1.4.0, `sprite.gdshader` was renamed to `sprite_shaded.gdshader`. If you correctly followed the previous instructions and then copied over the new files, you'll see something like this in the sprite folder:
+
+![Sprite files](readme_images/sprite_files.png)
+
+`sprite_shaded.gdshader` is redundant, so just delete it and rename the old `sprite.gdshader` to `sprite_shaded.gdshader`. Then, open the file and change the `#include` path from `"common.gdshaderinc"` to `"../common.gdshaderinc"`.
+
+All URSC versions after 1.4.0 will remain organized this way, so there'll be no need to take these specific upgrade steps again. 
+
 ## CanvasItem Shaders
 
 ### `dithering.gdshader`
