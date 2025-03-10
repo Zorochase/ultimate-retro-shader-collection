@@ -1,12 +1,14 @@
 # Ultimate Retro Shader Collection
 
+[![Godot](https://img.shields.io/badge/Godot_4.2_--_4.4-blue?style=flat&logo=godotengine&logoColor=white)](https://godotengine.org/) [![Itch](https://img.shields.io/badge/itch.io-red?style=flat&logo=itchdotio&logoColor=white)](https://zorochase.itch.io/ultimate-retro-shader-collection-for-godot)
+
 Shaders bringing 5th-gen console aesthetics to Godot 4.
+
+---
 
 <p align="center">
 <img alt="URSC Logo" src="./logo.png" width="192">
 </p>
-
----
 
 ## Features
 
@@ -76,7 +78,7 @@ One last thing: in 1.4.0, `sprite.gdshader` was renamed to `sprite_shaded.gdshad
 
 `sprite_shaded.gdshader` is redundant, so just delete it and rename the old `sprite.gdshader` to `sprite_shaded.gdshader`. Then, open the file and change the `#include` path from `"common.gdshaderinc"` to `"../common.gdshaderinc"`.
 
-All URSC versions after 1.4.0 will remain organized this way, so there'll be no need to take these specific upgrade steps again. 
+All URSC versions after 1.4.0 will remain organized this way, so there'll be no need to take these specific upgrade steps again.
 
 ## CanvasItem Shaders
 
