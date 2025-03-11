@@ -48,7 +48,7 @@ There are a few different places you can download the collection from:
 	- If you download URSC through the editor interface, uncheck "ignore asset root" to place the collection in your addons folder.
 
 > [!IMPORTANT]
-> Be sure to check the release notes (found under each release on the Releases page linked above) for your download to see which which Godot version(s) it was tested with. Generally, the latest release will be tested against the *latest stable version* of Godot.
+> Be sure to check the release notes (found under each release on the Releases page linked above) for your download to see which Godot version(s) it was tested with. Generally, the latest release will be tested against the *latest stable version* of Godot.
 
 Of course, there's no need to "enable" URSC through the project settings menu, as it isn't a plugin. However, some additional setup is needed once URSC has been downloaded before you can use the shaders.
 
