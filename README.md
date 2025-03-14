@@ -43,12 +43,14 @@ Check out these articles from the Godot documentation (if you haven't already) b
 There are a few different places you can download the collection from:
 - the [Releases](https://github.com/Zorochase/ultimate-retro-shader-collection/releases) page here on GitHub
 - the [itch.io](https://zorochase.itch.io/ultimate-retro-shader-collection-for-godot) page
-	- Want to see the shaders in action? Head here for a demo you can play right in your browser!
 - the [Godot Asset Library](https://godotengine.org/asset-library/asset/2989)
 	- If you download URSC through the editor interface, uncheck "ignore asset root" to place the collection in your addons folder.
 
 > [!IMPORTANT]
 > Be sure to check the release notes (found under each release on the Releases page linked above) for your download to see which Godot version(s) it was tested with. Generally, the latest release will be tested against the *latest stable version* of Godot.
+
+> [!TIP]
+> Want to see the collection in action before adding it to your own project? Check out the **Sample Pack** (found under Releases or on itch.io)! It's a Godot project with a variety of sample models.
 
 Of course, there's no need to "enable" URSC through the project settings menu, as it isn't a plugin. However, some additional setup is needed once URSC has been downloaded before you can use the shaders.
 
