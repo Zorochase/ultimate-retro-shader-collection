@@ -8,6 +8,10 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Ultimate Retro Shader Collection"
@@ -15,10 +19,10 @@ config/description="This is the development repository for the Ultimate Retro Sh
 config/version="1.4.0"
 run/main_scene="res://playground/playground.tscn"
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
-boot_splash/fullsize=false
+boot_splash/stretch_mode=0
 boot_splash/use_filter=false
 config/icon="uid://di0pfvrgpugt2"
 
