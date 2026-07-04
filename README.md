@@ -43,7 +43,7 @@ Check out these articles from the Godot documentation (if you haven't already) b
 There are a few different places you can download the collection from:
 - the [Releases](https://github.com/Zorochase/ultimate-retro-shader-collection/releases) page here on GitHub
 - the [itch.io](https://zorochase.itch.io/ultimate-retro-shader-collection-for-godot) page
-- the [Godot Asset Library](https://godotengine.org/asset-library/asset/2989)
+- the [Godot Asset Library](https://godotengine.org/asset-library/asset/2989) (4.6 and below) or the [Godot Asset Store](https://store.godotengine.org/asset/zorochase/ultimate-retro-shader-collection/) (4.7 and up)
 	- If you download URSC through the editor interface, uncheck "ignore asset root" to place the collection in your addons folder.
 
 > [!IMPORTANT]
