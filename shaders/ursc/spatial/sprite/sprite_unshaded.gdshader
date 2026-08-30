@@ -1,7 +1,7 @@
 shader_type spatial;
 
-#define UNSHADED
 #define ALPHA_SCISSOR
 #define BILLBOARD
+#define UNSHADED
 
 #include "../common.gdshaderinc"

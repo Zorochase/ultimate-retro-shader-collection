@@ -2,7 +2,8 @@
 // simply uncomment the following line:
 // #define USE_ENVIRONMENT_FOG
 
-// Render mode
+#include "utilities.gdshaderinc"
+
 render_mode
 
 #if defined(BLEND_MODE)
@@ -36,15 +37,8 @@ render_mode
 	fog_disabled,
 #endif
 
-specular_disabled,
-shadows_disabled;
-
-
-// Constants
-#if !defined(OVERRIDE_VERTEX_SNAP_RESOLUTION)
-	const ivec2 VERTEX_SNAP_RESOLUTION = ivec2(320, 240);
-#endif
-
+	specular_disabled,
+	shadows_disabled;
 
 // Global uniforms
 #if !defined(TEXTURE_DISABLED) && !defined(SHINY)
@@ -69,7 +63,6 @@ shadows_disabled;
 #endif
 
 global uniform float cull_distance;
-
 
 // Uniforms
 #if defined(ALPHA_BLEND) || (defined(ALPHA_SCISSOR) && !defined(SHINY) && !defined(TEXTURE_METAL))
@@ -96,10 +89,10 @@ global uniform float cull_distance;
 		uniform float alpha_scissor : hint_range(0, 1, 0.01) = 0.1;
 	#else
 		uniform bool albedo_texture_as_primary_color = true;
-		uniform float mix_factor: hint_range(0.0, 1.0, 0.01) = 1.0;
+		uniform float mix_factor : hint_range(0.0, 1.0, 0.01) = 1.0;
 	#endif
 
-	uniform float texture_lod_halve_distance_override : hint_range(0.0, 32.0, 2.0) = 0;
+	uniform float texture_lod_halve_distance_override : hint_range(0.0, 32.0, 2.0) = 0.0;
 
 	#if !defined(TEXTURE_METAL)
 		uniform vec2 uv_offset = vec2(0.0);
@@ -109,14 +102,18 @@ global uniform float cull_distance;
 #endif
 
 #if defined(BILLBOARD)
-	uniform int billboard_mode: hint_range(0, 2);
+	uniform int billboard_mode : hint_range(0, 2);
 	uniform bool use_transform_scale = true;
 #endif
 
-uniform float cull_distance_override: hint_range(0.0, 1024.0, 2.0) = 0;
+uniform float cull_distance_override : hint_range(0.0, 1024.0, 2.0) = 0.0;
 
 uniform bool convert_vertex_colors = false;
 
+// Constants
+#if !defined(OVERRIDE_VERTEX_SNAP_RESOLUTION)
+	const ivec2 VERTEX_SNAP_RESOLUTION = ivec2(320, 240);
+#endif
 
 // Varyings
 #if !defined(TEXTURE_DISABLED) && !defined(TEXTURE_METAL) && !defined(SHINY)
@@ -133,8 +130,7 @@ uniform bool convert_vertex_colors = false;
 
 // Functions
 #if defined(SHINY)
-	vec3 glimmer(vec3 input)
-	{
+	vec3 glimmer(vec3 input) {
 		float grayscale = max(vec3(input).r, max(vec3(input).g, vec3(input).b));
 		float lower = floor(grayscale * color_depth) / color_depth;
 		float lower_difference = abs(grayscale - lower);
@@ -144,91 +140,26 @@ uniform bool convert_vertex_colors = false;
 		float adjustment = level / grayscale;
 		return vec3(input) * adjustment;
 	}
-#elif !defined(TEXTURE_DISABLED)
-	vec4 albedoTextureFiltered(vec2 uv)
-	{
-		vec2 albedo_texture_size = vec2(textureSize(albedo_texture, 0));
-
-		vec2 tex_pix_a = vec2(1.0 / albedo_texture_size.x, 0.0);
-		vec2 tex_pix_b = vec2(0.0, 1.0 / albedo_texture_size.y);
-		vec2 tex_pix_c = vec2(tex_pix_a.x,tex_pix_b.y);
-		vec2 half_tex = vec2(tex_pix_a.x * 0.5, tex_pix_b.y * 0.5);
-		vec2 uv_centered = uv - half_tex;
-
-		vec4 diffuse_color = texture(albedo_texture, uv_centered);
-		vec4 sample_a = texture(albedo_texture, uv_centered + tex_pix_a);
-		vec4 sample_b = texture(albedo_texture, uv_centered + tex_pix_b);
-		vec4 sample_c = texture(albedo_texture, uv_centered + tex_pix_c);
-
-		float interp_x = modf(uv_centered.x * albedo_texture_size.x, albedo_texture_size.x);
-		float interp_y = modf(uv_centered.y * albedo_texture_size.y, albedo_texture_size.y);
-
-		if (uv_centered.x < 0.0)
-		{
-			interp_x = 1.0 - interp_x * -1.0;
-		}
-		if (uv_centered.y < 0.0)
-		{
-			interp_y = 1.0 - interp_y * -1.0;
-		}
-
-		diffuse_color = (
-			diffuse_color +
-			interp_x * (sample_a - diffuse_color) +
-			interp_y * (sample_b - diffuse_color)) *
-			(1.0 - step(1.0, interp_x + interp_y));
-
-		diffuse_color += (
-			(sample_c + (1.0 - interp_x) * (sample_b - sample_c) +
-			(1.0 - interp_y) * (sample_a - sample_c)) *
-			step(1.0, interp_x + interp_y));
-
-	    return diffuse_color;
-	}
 #endif
 
-// https://gamedev.stackexchange.com/a/194038
-vec3 fromLinear(vec3 linear_color)
-{
-	bvec3 cutoff = lessThan(linear_color.rgb, vec3(0.0031308));
-	vec3 higher = vec3(1.055) * pow(linear_color.rgb, vec3(1.0 / 2.4)) - vec3(0.055);
-	vec3 lower = linear_color.rgb * vec3(12.92);
-
-	return mix(higher, lower, cutoff);
-}
-
-// https://gamedev.stackexchange.com/a/194038
-vec3 toLinear(vec3 srgb_color)
-{
-	bvec3 cutoff = lessThan(srgb_color.rgb, vec3(0.04045));
-	vec3 higher = pow((srgb_color.rgb + vec3(0.055)) / vec3(1.055), vec3(2.4));
-	vec3 lower = srgb_color.rgb / vec3(12.92);
-
-	return mix(higher, lower, cutoff);
-}
-
-void vertex()
-{
-	if (convert_vertex_colors)
-		COLOR.rgb = fromLinear(COLOR.rgb);
+void vertex() {
+	if (convert_vertex_colors) {
+		COLOR.rgb = linear_to_srgb(COLOR.rgb);
+	}
 
 	#if !defined(TEXTURE_DISABLED) && !defined(TEXTURE_METAL) && !defined(SHINY)
 		UV = UV * uv_scale + uv_offset + (uv_scroll_speed * TIME);
 	#endif
 
 	#if defined(BILLBOARD)
-		if (billboard_mode > 0)
-		{
-			if (billboard_mode == 1)
-			{
+		if (billboard_mode > 0) {
+			if (billboard_mode == 1) {
 				MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
 					INV_VIEW_MATRIX[0],
 					INV_VIEW_MATRIX[1],
 					INV_VIEW_MATRIX[2],
 					MODEL_MATRIX[3]);
-			}
-			else
-			{
+			} else {
 				MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
 					vec4(normalize(cross(vec3(0.0, 1.0, 0.0), INV_VIEW_MATRIX[2].xyz)), 0.0),
 					vec4(0.0, 1.0, 0.0, 0.0),
@@ -236,8 +167,7 @@ void vertex()
 					MODEL_MATRIX[3]);
 			}
 
-			if (use_transform_scale)
-			{
+			if (use_transform_scale) {
 				MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(
 					vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0),
 					vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0),
@@ -252,14 +182,11 @@ void vertex()
 	float vertex_distance = length((MODELVIEW_MATRIX * vec4(VERTEX, 1.0)));
 
 	#if !defined(FOG_DISABLED) && !defined(USE_ENVIRONMENT_FOG)
-		if (fog_start_distance >= 0.0 && fog_start_distance < fog_end_distance)
-		{
+		if (fog_start_distance >= 0.0 && fog_start_distance < fog_end_distance) {
 			fog_mix_factor = clamp(
 				(vertex_distance - fog_start_distance) / (fog_end_distance - fog_start_distance),
 				0.0, 1.0);
-		}
-		else
-		{
+		} else {
 			fog_mix_factor = 0.0;
 		}
 	#endif
@@ -279,12 +206,9 @@ void vertex()
 	float actual_cull_distance =
 		cull_distance_override > 0.0 ? cull_distance_override : cull_distance;
 
-	if (actual_cull_distance > 0.0 && vertex_distance > actual_cull_distance)
-	{
+	if (actual_cull_distance > 0.0 && vertex_distance > actual_cull_distance) {
 		POSITION = vec4(sqrt(-1));
-	}
-	else
-	{
+	} else {
 		POSITION = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(VERTEX, 1.0);
 
 		#if defined(OVERRIDE_VERTEX_SNAP_RESOLUTION)
@@ -305,8 +229,7 @@ void vertex()
 
 			POSITION.xyz = snapped_position.xyz;
 		#else
-			if (vertex_snap_intensity > 0 && vertex_snap_intensity <= 2)
-			{
+			if (vertex_snap_intensity > 0 && vertex_snap_intensity <= 2) {
 				vec2 real_vertex_snap_resolution =
 					vec2(VERTEX_SNAP_RESOLUTION) * (1.0 / float(vertex_snap_intensity));
 
@@ -329,16 +252,14 @@ void vertex()
 	}
 
 	#if !defined(TEXTURE_DISABLED) && !defined(TEXTURE_METAL) && !defined(SHINY)
-		if (affine_texture_mapping)
-		{
+		if (affine_texture_mapping) {
 			position_w = POSITION.w;
 			UV *= abs(POSITION.w);
 		}
 	#endif
 }
 
-void fragment()
-{
+void fragment() {
 	#if defined(SHINY)
 		vec3 light_dir = vec3(0.500000, 0.250000, 1.000000);
 		float light_dot = dot(light_dir, NORMAL);
@@ -371,25 +292,24 @@ void fragment()
 			#else
 				uv = UV;
 
-				if (affine_texture_mapping)
+				if (affine_texture_mapping) {
 					uv /= abs(position_w);
+				}
 			#endif
 
 			vec4 sampled_color;
 
-			if (should_halve_texture_lod == 1)
-			{
+			if (should_halve_texture_lod == 1) {
 				vec2 half_albedo_texture_size = vec2(textureSize(albedo_texture, 0)) * 0.5;
 				vec2 new_uv = floor(uv * half_albedo_texture_size) / half_albedo_texture_size;
 
 				sampled_color = texture(albedo_texture, new_uv);
-			}
-			else
-			{
-				if (texture_filtering)
-					sampled_color = albedoTextureFiltered(uv);
-				else
+			} else {
+				if (texture_filtering) {
+					sampled_color = texture_filtered(albedo_texture, uv);
+				} else {
 					sampled_color = texture(albedo_texture, uv);
+				}
 			}
 
 			#if (defined(ALPHA_SCISSOR) && !defined(SHINY) && !defined(TEXTURE_METAL))
@@ -418,6 +338,6 @@ void fragment()
 
 	#if !defined(FOG_DISABLED) && !defined(USE_ENVIRONMENT_FOG)
 		FOG.a = fog_mix_factor;
-		FOG.rgb = toLinear(fog_color.rgb);
+		FOG.rgb = srgb_to_linear(fog_color.rgb);
 	#endif
 }
