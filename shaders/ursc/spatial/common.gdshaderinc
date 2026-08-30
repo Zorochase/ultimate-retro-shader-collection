@@ -108,7 +108,7 @@ global uniform float cull_distance;
 
 uniform float cull_distance_override : hint_range(0.0, 1024.0, 2.0) = 0.0;
 
-uniform bool convert_vertex_colors = false;
+uniform bool srgb_vertex_colors = false;
 
 // Constants
 #if !defined(OVERRIDE_VERTEX_SNAP_RESOLUTION)
@@ -143,7 +143,7 @@ uniform bool convert_vertex_colors = false;
 #endif
 
 void vertex() {
-	if (convert_vertex_colors) {
+	if (srgb_vertex_colors) {
 		COLOR.rgb = linear_to_srgb(COLOR.rgb);
 	}
 
