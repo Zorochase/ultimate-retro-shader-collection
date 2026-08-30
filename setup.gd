@@ -1,14 +1,13 @@
-# Ultimate Retro Shader Collection (v1.4.0): Setup Script
+# Ultimate Retro Shader Collection v1.5 Setup Script
 #
 # This script will add the necessary shader globals for URSC shaders to your project.godot file.
 # To run, just click File -> Run.
 # In order to fully register the globals, the editor will be restarted upon running.
 #
-# NOTE: this script CAN'T be used to manage the globals for your game! You'll need to write your
+# NOTE: this script can't be used to manage the globals for your game. You'll need to write your
 # own code to handle the values of the globals at runtime.
 @tool
 extends EditorScript
-
 
 var shader_globals := {
 	"affine_texture_mapping": {

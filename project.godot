@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Ultimate Retro Shader Collection"
 config/description="This is the development repository for the Ultimate Retro Shader Collection."
-config/version="1.4.0"
+config/version="1.5"
 run/main_scene="res://playground/playground.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.7", "Forward Plus")
