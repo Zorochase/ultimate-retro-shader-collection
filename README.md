@@ -98,18 +98,6 @@ In the example above, the shader is applied to a SubViewportContainer with a Sub
 > [!TIP]
 > You can find a great set of free pattern textures [here](https://github.com/tromero/BayerMatrix), thanks to **tromero**.
 
-### `fade.gdshader`
-
-![Example](readme_images/fade_example.png)
-
-You can use this shader to create a PSX-like "fade-overlay" for scene or menu transitions -- just apply it to the material of a ColorRect node with its layout preset set to "Full Rect." If you're using the dithering shader on a SubViewportContainer, add this ColorRect as a child so it renders above the container's SubViewport.
-
-The `mode` uniform exposed by this shader controls the blending mode to use; a value of **-1** for subtractive (to fade to black), and **1** for additive (to fade to white).
-
-Fading in and out is done by setting the opacity of the node the shader's applied to. With a ColorRect, changing `color.a`, `modulate.a` and `self_modulate.a` all work.
-
-In the example above, both tiles are being dimmed by an overlay with an alpha value of 25. On the left, the shader is disabled (but the overlay is still being rendered). Notice how much deeper and darker the colors are on the right; this effect is due to subtractive blending. With subtractive blending, the lightest colors take the longest to fade out, and vice versa with additive blending.
-
 ## Spatial Shaders
 
 Most of the spatial shaders in the collection are organized by category. For example, under `ursc/spatial/standard` you'll see `standard_opaque.gdshader` and `standard_transparent.gdshader`.
